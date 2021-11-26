@@ -1,7 +1,5 @@
-﻿namespace VrRetreat.Core
-{
-    public class Class1
-    {
+﻿namespace VrRetreat.Core;
 
-    }
+public class Class1
+{
 }
