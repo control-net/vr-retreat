@@ -9,10 +9,10 @@ Challenge yourself to quit [VRChat](https://hello.vrchat.com/) for a month while
     <img src="https://img.shields.io/github/license/control-net/vr-retreat?style=for-the-badge">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/github/workflow/status/control-net/vr-retreat/dotnet/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/workflow/status/control-net/vr-retreat/.NET/main?style=for-the-badge">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/codacy/grade/someid/main?style=for-the-badge">
+    <img src="https://img.shields.io/codacy/grade/d47c952003ed4824a19db230b5761b05/main?style=for-the-badge">
   </a>
   <a href="https://dot.net">
     <img src="https://img.shields.io/badge/made%20with-.NET%206-blueviolet?style=for-the-badge">
