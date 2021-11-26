@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build src/ --no-restore
+      run: dotnet build src/VrRetreat.sln --no-restore
     - name: Test
-      run: dotnet test src/ --no-build --verbosity normal
+      run: dotnet test src/VrRetreat.sln --no-build --verbosity normal
