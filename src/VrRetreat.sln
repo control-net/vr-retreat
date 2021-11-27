@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VrRetreat.Tests", "VrRetrea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VrRetreat.Core", "VrRetreat.Core\VrRetreat.Core.csproj", "{FB1DF9ED-E552-4A3D-9978-8BD4DDFC77AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VrRetreat.WebApp", "VrRetreat.WebApp\VrRetreat.WebApp.csproj", "{7DDAC597-CE39-495E-8437-F37EE1EE41ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VrRetreat.WebApp", "VrRetreat.WebApp\VrRetreat.WebApp.csproj", "{32545759-CC3B-49DE-9B61-7848E8F74184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FB1DF9ED-E552-4A3D-9978-8BD4DDFC77AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB1DF9ED-E552-4A3D-9978-8BD4DDFC77AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB1DF9ED-E552-4A3D-9978-8BD4DDFC77AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DDAC597-CE39-495E-8437-F37EE1EE41ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DDAC597-CE39-495E-8437-F37EE1EE41ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DDAC597-CE39-495E-8437-F37EE1EE41ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DDAC597-CE39-495E-8437-F37EE1EE41ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32545759-CC3B-49DE-9B61-7848E8F74184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32545759-CC3B-49DE-9B61-7848E8F74184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32545759-CC3B-49DE-9B61-7848E8F74184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32545759-CC3B-49DE-9B61-7848E8F74184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

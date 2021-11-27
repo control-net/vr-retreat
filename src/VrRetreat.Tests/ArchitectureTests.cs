@@ -12,7 +12,7 @@ namespace VrRetreat.Tests;
 public class ArchitectureTests
 {
     private static readonly Architecture Architecture =
-            new ArchLoader().LoadAssemblies(typeof(Class1).Assembly, typeof(WeatherForecastController).Assembly)
+            new ArchLoader().LoadAssemblies(typeof(Class1).Assembly, typeof(HomeController).Assembly)
             .Build();
 
     private readonly IObjectProvider<IType> CoreLayer = Types().That().ResideInAssembly("VrRetreat.Core").And().ResideInNamespace("VrRetreat").As("Core");

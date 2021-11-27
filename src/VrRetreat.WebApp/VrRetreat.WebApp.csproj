@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-VrRetreat.WebApp-AF55A367-CF4D-43FF-BBD2-B2D0AA190C27</UserSecretsId>
+    <UserSecretsId>aspnet-VrRetreat.WebApp-64E45477-C992-40A5-AC9D-F019A139FBD5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +13,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VrRetreat.Core\VrRetreat.Core.csproj" />
   </ItemGroup>
 
 </Project>
