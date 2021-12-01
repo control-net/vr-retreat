@@ -23,7 +23,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VrRetreat.Core\VrRetreat.Core.csproj" />
+    <ProjectReference Include="..\VrRetreat.Infrastructure\VrRetreat.Infrastructure.csproj" />
     <ProjectReference Include="..\VrRetreat.WebApp\VrRetreat.WebApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestConfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

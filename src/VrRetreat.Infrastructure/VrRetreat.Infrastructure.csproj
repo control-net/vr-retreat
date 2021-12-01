@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\micro\.nuget\packages\vrchat.api.client\1.1.0\contentFiles\any\netstandard2.0\vrc_cat.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="VRChat.API" Version="1.6.3" />
+    <PackageReference Include="VRChat.API.Client" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VrRetreat.Core\VrRetreat.Core.csproj" />
+  </ItemGroup>
+
+</Project>
