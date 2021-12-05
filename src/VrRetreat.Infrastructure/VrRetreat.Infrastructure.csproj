@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="VRChat.API" Version="1.6.3" />
-    <PackageReference Include="VRChat.API.Client" Version="1.1.0" />
+    <PackageReference Include="VRChat.API" Version="1.6.4-rc1" />
   </ItemGroup>
 
   <ItemGroup>
