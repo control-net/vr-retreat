@@ -38,3 +38,30 @@ Navigate into the `/src` directory of this project and run the following:
 ```bash
 dotnet build
 ```
+
+## Config
+
+In order to run VRChat API tests or run the application against a real VRChat API you're going to need to create a configuration file with the appropriate credentials.
+
+### For Unit Tests
+
+- Create a file and name it `TestConfig.json` in the `/src/VrRetreat.Tests/` directory.
+
+### For Application Use
+
+- _A configuration file isn't yet defined for the application itself._
+
+### Contents
+
+The contents of your config file should be as follows:
+
+```json
+{
+  "VrChatUsername": "Your-VrChat-Username-Here",
+  "VrChatPassword": "Your-VrChat-Password-Here",
+}
+```
+
+> :warning: You shouldn't use your real VRChat account, instead, create a new one
+
+> :warning: This will not work if the account has 2FA enabled
