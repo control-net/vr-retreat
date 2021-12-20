@@ -25,4 +25,14 @@ public class VrcApiTests
 
         Assert.Equal(expected, actual);
     }
+
+    [Fact(Skip = "Officially, we're not supposed to call the API more than once per 60 seconds!")]
+    private async Task GetUserByName_ShouldReturnCorrectUser()
+    {
+        await _sut.InitializeAsync();
+
+        //var actual = await _sut.GetPlayerByNameAsync("Alanthea");
+
+        //Assert.NotNull(actual);
+    }
 }

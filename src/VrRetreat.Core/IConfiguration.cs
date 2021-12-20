@@ -1,8 +1,7 @@
-﻿namespace VrRetreat.Core
+﻿namespace VrRetreat.Core;
+
+public interface IConfiguration
 {
-    public interface IConfiguration
-    {
-        string VrChatUsername { get; }
-        string VrChatPassword { get; }
-    }
+    string VrChatUsername { get; }
+    string VrChatPassword { get; }
 }

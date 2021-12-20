@@ -1,8 +1,8 @@
-﻿namespace VrRetreat.Core
+﻿namespace VrRetreat.Core;
+
+public interface IVrChat
 {
-    public interface IVrChat
-    {
-        Task InitializeAsync();
-        Task<bool> GetPlayerExistsAsync(string username);
-    }
+    Task InitializeAsync();
+    Task<bool> GetPlayerExistsAsync(string username);
+    Task GetPlayerByNameAsync(string username);
 }
