@@ -1,0 +1,16 @@
+﻿@model DashboardViewModel
+
+<h1>Welcome to the dashboard!</h1>
+
+<p>Name: @Model.CurrentUser.Username</p>
+
+<img src="@Model.CurrentUser.AvatarUrl" width=60 height=60 />
+
+<hr /><hr />
+
+@foreach(var user in Model.FollowedPeople)
+{
+    <p>Name: @user.Username</p>
+    <img src="@user.AvatarUrl" width=60 height=60 />
+    <hr />
+}
