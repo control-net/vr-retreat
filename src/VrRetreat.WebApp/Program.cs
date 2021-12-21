@@ -19,10 +19,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<VrRetreatUser, IdentityRole>(options =>
 {
     options.User.RequireUniqueEmail = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredUniqueChars = 0;
 #if DEBUG
     options.Password.RequireDigit = false;
-    options.Password.RequiredUniqueChars = 0;
-    options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 3;
     options.Password.RequireUppercase = false;
 #endif

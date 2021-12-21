@@ -1,31 +1,41 @@
 ﻿@model UserLoginModel
 
-<h1>Login</h1>
-<div class="row">
-    <div class="col-md-4">
+<div class="vrh-bg-login">
+    <div class="vrh-registration-card">
+        <p class="vrh-lead mb-4 mt-4">Welcome Back!</p>
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+            <div class="form-group vrh-form-group">
+                <label asp-for="Username" class="control-label vrh-label"></label>
+                <input asp-for="Username" class="form-control vrh-input" />
+                <span asp-validation-for="Username" class="text-danger vrh-validation-error"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="form-group vrh-form-group">
+                <label asp-for="Password" class="control-label vrh-label"></label>
+                <input asp-for="Password" class="form-control vrh-input" />
+                <span asp-validation-for="Password" class="text-danger vrh-validation-error"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
+            <div class="form-group form-check vrh-form-group">
+                <label class="form-check-label vrh-label">
                     <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Log In" class="btn btn-primary" />
+                <input type="submit" value="Log In" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
             </div>
         </form>
+        <p class="vrh-footnote-text mt-3">Don’t have an account? <a asp-controller="Account" asp-action="Register">Create one</a>!</p>
+        <div class="vrh-ua vrh-mt-xxl">
+            <div class="vrh-ua-icon">?</div><span class="vrh-footnote-text"> What if I forgot my credentials?</span>
+            <div class="vrh-ua-content" style="top: -11em;">
+                <p>In case of forgotten credentials, just create a new account and link it with the same VRChat account you had previously.</p>
+                <p>This will unlink it from the lost account. You will not lose your progress by doing this.</p>
+            </div>
+        </div>
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

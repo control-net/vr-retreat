@@ -1,33 +1,50 @@
 ﻿@model UserRegistrationModel
 
-<h1>Register</h1>
-<h4>UserRegistrationModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="vrh-bg-registration">
+    <div class="vrh-registration-card">
+        <p class="vrh-lead mb-4 mt-4">Let's make an Account!</p>
         <form asp-action="Register">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+            <div class="form-group vrh-form-group">
+                <label asp-for="Username" class="control-label vrh-label"></label>
+                <input asp-for="Username" class="form-control vrh-input" />
+                <span asp-validation-for="Username" class="text-danger vrh-validation-error"></span>
+            </div>
+            <div class="form-group vrh-form-group">
+                <label asp-for="Password" class="control-label vrh-label"></label>
+                <input asp-for="Password" class="form-control vrh-input" />
+                <span asp-validation-for="Password" class="text-danger vrh-validation-error"></span>
+            </div>
+            <div class="form-group vrh-form-group">
+                <label asp-for="ConfirmPassword" class="control-label vrh-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control vrh-input" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger vrh-validation-error"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Register" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
             </div>
         </form>
+        <p class="vrh-footnote-text mt-3">Already have an Account? <a asp-controller="Account" asp-action="Login">Login</a>!</p>
+        <div class="vrh-ua vrh-mt-xxl">
+            <div class="vrh-ua-icon">?</div><span class="vrh-footnote-text"> What happens to my data?</span>
+            <div class="vrh-ua-content">
+                <p>We only store the following information for the duration of the challenge and never send it to any 3rd party at all.</p>
+                <p>You can always request a copy or deletion of your data in the Settings.</p>
+                <p>The data we store:</p>
+                <ul>
+                    <li>Your VRChat displayname at the time of linking</li>
+                    <li>Your last login date at the time of linking</li>
+                    <li>Your VRChat avatar thumbnail at the time of linking</li>
+                </ul>
+                <p><b>All of this data will be permanently deleted after this year’s challenge is over.</b></p>
+            </div>
+        </div>
     </div>
 </div>
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

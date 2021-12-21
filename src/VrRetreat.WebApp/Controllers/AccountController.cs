@@ -21,6 +21,9 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Register()
     {
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Index", "Home");
+
         return View();
     }
 
@@ -28,6 +31,9 @@ public class AccountController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(UserRegistrationModel userModel)
     {
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Index", "Home");
+
         if (!ModelState.IsValid)
         {
             return View(userModel);
@@ -49,12 +55,15 @@ public class AccountController : Controller
             return View(userModel);
         }
 
-        return RedirectToAction(nameof(HomeController.Index), "Home");
+        return RedirectToAction(nameof(Login));
     }
 
     [HttpGet]
     public IActionResult Login()
     {
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Index", "Home");
+
         return View();
     }
 
@@ -62,6 +71,9 @@ public class AccountController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(UserLoginModel userModel)
     {
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Index", "Home");
+
         if (!ModelState.IsValid)
         {
             return View(userModel);
