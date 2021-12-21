@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .vrh-navbar-bg {
@@ -30,4 +30,85 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+.vrh-hero-wrapper {
+    background-image: url('../img/hero.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 10em 0;
+}
+
+.vrh-btn-primary {
+    background-color: #427341;
+    color: white;
+}
+
+.vrh-btn-primary:hover {
+    background-color: #244023;
+    color: #eee;
+}
+
+.vrh-btn-secondary {
+    background-color: #373737;
+    color: white;
+}
+
+.vrh-btn-secondary:hover {
+    background-color: #252525;
+    color: #eee;
+}
+
+.vrh-subtitle {
+    margin-top: 1.5em;
+    font-weight: bold;
+    border-bottom: 3px solid #8a8888;
+    padding-bottom: 5px;
+}
+
+.vrh-screenshot {
+    width: 50%;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.4);
+}
+
+.vrh-landing-bullet {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #417340;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.vrh-landing-point {
+    display: flex;
+    align-items: center;
+    margin: 2em;
+}
+
+.vrh-title-and-subtitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.vrh-title-and-subtitle > span:first-child {
+    font-size: 20px;
+}
+
+.vrh-title-and-subtitle > span:nth-child(2) {
+    font-style: italic;
+}
+
+.vrh-landing-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vrh-landing-footer > h3 {
+    font-weight: bold;
+    margin-bottom: 1em;
+    margin-top: 1.5em;
 }

@@ -2,8 +2,77 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Hello, person who I do not know... You're here for the challenge right?</h1>
+<div class="vrh-hero-wrapper text-center">
+    <h1 class="display-4 fw-bold mb-3">Welcome to VR Health</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">The home of 2022’s Just Live your Life January Challenge </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <a asp-controller="Account" asp-action="Register" class="btn vrh-btn-primary btn-lg px-4 me-sm-3">Join the Challenge</a>
+            <a href="#about-challenge" class="btn vrh-btn-secondary btn-lg px-4">Learn More</a>
+        </div>
+    </div>
+</div>
 
-<p>Please do not hesitate and <a asp-controller="Account" asp-action="Register">Make an account</a>!</p>
+<div class="container">
+    <h2 class="vrh-subtitle mb-4" id="about-challenge">About the Challenge</h2>
+    <p>VRChat is a fun and immersive experience, but too much of anything can be a problem. Whatever your reason for participating may be, feel free to join and challenge yourself to not play VRChat for the netirety of January 2022.</p>
+    <p>The website will keep track of the last time you logged into VRChat and will keep track of whether or not you failed the challenge.</p>
 
-<p>Already have an account? <a asp-controller="Account" asp-action="Login">Log in</a>!</p>
+    <div class="text-center">
+        <img src="~/img/screenshot.webp" alt="Application Screenshot" class="vrh-screenshot mt-4" />
+    </div>
+
+    <h2 class="vrh-subtitle mb-4">How does it work?</h2>
+
+    <div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>1</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Create a vrstop.health account</span>
+                <span>only a username and a password is required</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>2</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Provide your VRChat displayname</span>
+                <span>this may be different than your vrstop.health username</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>3</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Accept the website’s friend request</span>
+                <span>this is because VRChat only shows last login date for friends</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>4</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Put a short generated code in your VRChat bio</span>
+                <span>this is to make sure you really are linking your own account</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>5</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Follow your friends to hold them accountable</span>
+                <span>if you allow others to follow your progress, they can follow you too!</span>
+            </div>
+        </div>
+    </div>
+    <div class="vrh-landing-footer">
+        <h3>So what do you say?</h3>
+        <a asp-controller="Account" asp-action="Register" class="btn vrh-btn-primary btn-lg px-4 me-sm-3">Join the Challenge</a>
+    </div>
+</div>
