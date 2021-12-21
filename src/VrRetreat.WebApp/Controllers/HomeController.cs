@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VrRetreat.Infrastructure.Entities;
 using VrRetreat.WebApp.Models;
 
 namespace VrRetreat.WebApp.Controllers
@@ -7,13 +9,23 @@ namespace VrRetreat.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SignInManager<VrRetreatUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SignInManager<VrRetreatUser> signInManager)
         {
             _logger = logger;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
+        {
+            if(!_signInManager.IsSignedIn(User))
+                return View();
+
+            return View("AccountLinking");
+        }
+
+        public IActionResult Dashboard()
         {
             var model = new DashboardViewModel
             {
@@ -24,7 +36,7 @@ namespace VrRetreat.WebApp.Controllers
                     LastVrChatLogin = DateTime.Now.AddDays(-2).AddHours(-10),
                     Failed = false
                 },
-                FollowedPeople = new []
+                FollowedPeople = new[]
                 {
                     new UserDashboardModel()
                     {

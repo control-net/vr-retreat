@@ -20,11 +20,11 @@ public class ArchitectureTests
     private readonly IObjectProvider<IType> WebAppLayer = Types().That().ResideInAssembly("VrRetreat.WebApp").And().ResideInNamespace("VrRetreat").As("WebApp");
     private readonly IObjectProvider<IType> Infrastructure = Types().That().ResideInAssembly("VrRetreat.Infrastructure").And().ResideInNamespace("VrRetreat").As("Infrastructure");
 
-    [Fact]  
+    [Fact]
     public void CoreShouldNotDependOnOtherProjects()
     {
         IArchRule coreToWebApp = Types().That().Are(CoreLayer).Should().NotDependOnAny(WebAppLayer).Because("Core has to remain dependency free");
-        IArchRule coreToInfrastructure = Types().That().Are(CoreLayer).Should().NotDependOnAny(WebAppLayer).Because("Core has to remain dependency free");
+        IArchRule coreToInfrastructure = Types().That().Are(CoreLayer).Should().NotDependOnAny(Infrastructure).Because("Core has to remain dependency free");
 
         coreToWebApp.Check(Architecture);
         coreToInfrastructure.Check(Architecture);

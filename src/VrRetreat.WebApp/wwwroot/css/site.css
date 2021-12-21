@@ -16,3 +16,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.vrh-navbar-bg {
+    background-color: #353535;
+}
+
+.vrh-page-bg {
+    background-color: #181818;
+    color: white;
+}
+
+.vrh-navbar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
