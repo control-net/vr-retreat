@@ -1,0 +1,40 @@
+name: Production Deployment
+
+on:
+  workflow_dispatch
+
+jobs:
+  deployment:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Install EF Core tools
+      run: dotnet tool install --global dotnet-ef
+    - name: Publish
+      run: dotnet publish -c Release -r linux-x64 --self-contained false -o deploy src/VrRetreat.WebApp/VrRetreat.WebApp.csproj
+    - name: Generate Migrations
+      run: |
+        cd src/VrRetreat.WebApp
+        dotnet ef migrations bundle --self-contained -r linux-x64 --verbose --configuration uwu
+        cd ../..
+    - name: Setup SSH Access
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 700 ~/.ssh/id_rsa
+        ssh-keyscan -H vrstop.health >> ~/.ssh/known_hosts
+    - name: Deploy Application
+      run: |
+        rm ./deploy/appsettings.json
+        echo '${{ secrets.PROD_APPSETTINGS }}' > ./deploy/appsettings.json
+        scp -o StrictHostKeyChecking=no -r ./deploy/* root@vrstop.health://var/www/vrstopstage
+    - name: Copy and Apply Migrations
+      run: |
+        scp -o StrictHostKeyChecking=no ./src/VrRetreat.WebApp/efbundle root@vrstop.health://var/www/vrstopstage
+        ssh root@vrstop.health "cd /var/www/vrstopstage && chmod +x ./efbundle && ./efbundle --connection '${{ secrets.MIGRATIONS_CONN_STRING }}'"
