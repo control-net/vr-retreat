@@ -1,4 +1,11 @@
-﻿@model UserRegistrationModel
+﻿@using BenjaminAbt.HCaptcha
+@using Microsoft.Extensions.Options
+@model UserRegistrationModel
+@inject IOptions<HCaptchaOptions> CaptchaOptionsAccesor
+
+@{
+    var captchaOptions = CaptchaOptionsAccesor.Value;
+}
 
 <div class="vrh-bg-registration">
     <div class="vrh-registration-card">
@@ -19,6 +26,10 @@
                 <label asp-for="ConfirmPassword" class="control-label vrh-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control vrh-input" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger vrh-validation-error"></span>
+            </div>
+            <script src="@(captchaOptions.JavaScriptUrl)" async defer></script>
+            <div class="form-group">
+                <div class="h-captcha" data-sitekey="@(captchaOptions.SiteKey)"></div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />

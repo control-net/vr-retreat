@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using BenjaminAbt.HCaptcha;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -29,10 +30,19 @@ public class AccountController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(UserRegistrationModel userModel)
+    public async Task<IActionResult> Register(UserRegistrationModel userModel, HCaptchaVerifyResponse hCaptcha)
     {
         if (_signInManager.IsSignedIn(User))
             return RedirectToAction("Index", "Home");
+
+        if (!hCaptcha.Success)
+        {
+            // Note(Peter): The hCaptcha library we're using already adds a weird field
+            //              telling us "Hostname field is required" this should eventually
+            //              be somehow renamed. (it's a trivial UI issue for now)
+            ModelState.AddModelError("Hostname", "hCaptcha was not successfully solved.");
+            return View(userModel);
+        }
 
         if (!ModelState.IsValid)
         {

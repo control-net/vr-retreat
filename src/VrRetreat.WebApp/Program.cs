@@ -1,3 +1,4 @@
+using BenjaminAbt.HCaptcha.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -31,8 +32,10 @@ builder.Services.AddIdentity<VrRetreatUser, IdentityRole>(options =>
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<VrRetreatUser>, CustomClaimsFactory>();
 
+builder.Services.AddHCaptcha(builder.Configuration.GetSection("HCaptcha"));
+
 builder.Services.AddRazorPages();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(mvcOptions => mvcOptions.AddHCaptchaModelBinder());
 
 var app = builder.Build();
 
