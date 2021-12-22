@@ -38,3 +38,6 @@ jobs:
       run: |
         scp -o StrictHostKeyChecking=no ./src/VrRetreat.WebApp/efbundle root@vrstop.health://var/www/vrstopstage
         ssh root@vrstop.health "cd /var/www/vrstopstage && chmod +x ./efbundle && ./efbundle --connection '${{ secrets.MIGRATIONS_CONN_STRING }}'"
+    - name: Restart Production App
+      run: |
+        ssh root@vrstop.health "systemctl restart vrstop"
