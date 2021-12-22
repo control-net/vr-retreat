@@ -1,6 +1,8 @@
-# VR Retreat
+![VR Retreat](docs/img/header.PNG)
 
-Challenge yourself to quit [VRChat](https://hello.vrchat.com/) for a month while completing challenges and keeping track of yours and other's progress.
+<p align="center">
+Challenge yourself to quit <a href="https://hello.vrchat.com/">VRChat</a> for a month while completing challenges and keeping track of yours and other's progress.
+</p>
 
 ---
 
