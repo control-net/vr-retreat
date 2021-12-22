@@ -29,6 +29,8 @@ jobs:
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 700 ~/.ssh/id_rsa
         ssh-keyscan -H vrstop.health >> ~/.ssh/known_hosts
+    - name: Stop Production App
+      run: ssh root@vrstop.health "systemctl stop vrstop"
     - name: Deploy Application
       run: |
         rm ./deploy/appsettings.json
@@ -39,5 +41,4 @@ jobs:
         scp -o StrictHostKeyChecking=no ./src/VrRetreat.WebApp/efbundle root@vrstop.health://var/www/vrstopstage
         ssh root@vrstop.health "cd /var/www/vrstopstage && chmod +x ./efbundle && ./efbundle --connection '${{ secrets.MIGRATIONS_CONN_STRING }}'"
     - name: Restart Production App
-      run: |
-        ssh root@vrstop.health "systemctl restart vrstop"
+      run: ssh root@vrstop.health "systemctl restart vrstop"
