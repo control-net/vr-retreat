@@ -42,8 +42,18 @@ public class VrChat : IVrChat
 
     public async Task<VrChatUser> GetPlayerByNameAsync(string username)
     {
-        var result = await _users.GetUserByNameAsync(username);
-        return ToVrChatUser(result);
+        try
+        {
+            var result = await _users.GetUserByNameAsync(username);
+            return ToVrChatUser(result);
+        }
+        catch (ApiException e)
+        {
+            if (e.ErrorCode == 404)
+                return null!;
+
+            throw;
+        }
     }
 
     private VrChatUser ToVrChatUser(User result) => new()
