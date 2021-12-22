@@ -2,6 +2,9 @@
 @using Microsoft.Extensions.Options
 @model UserRegistrationModel
 @inject IOptions<HCaptchaOptions> CaptchaOptionsAccesor
+@{
+    ViewData["Title"] = "Register";
+}
 
 @{
     var captchaOptions = CaptchaOptionsAccesor.Value;

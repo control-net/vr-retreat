@@ -8,12 +8,10 @@ namespace VrRetreat.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<VrRetreatUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, SignInManager<VrRetreatUser> signInManager)
+        public HomeController(SignInManager<VrRetreatUser> signInManager)
         {
-            _logger = logger;
             _signInManager = signInManager;
         }
 
@@ -63,11 +61,6 @@ namespace VrRetreat.WebApp.Controllers
             };
 
             return View("Dashboard", model);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
