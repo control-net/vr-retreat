@@ -2,8 +2,41 @@
     ViewData["Title"] = "Home";
 }
 
-<h2>Thank you for making an Account so early!</h2>
+<div class="container mt-4">
+    <div class="text-center">
+            <a asp-controller="Account" asp-action="Register" class="btn vrh-btn-primary btn-lg px-4 me-sm-3">Link Your VRChat Account</a>
+    </div>
 
-<p>At this stage of development, there are no more features for you to explore.</p>
 
-<p>Please check back at a later date...</p>
+    <h2 class="vrh-subtitle mb-4">The Linking Process</h2>
+
+    <div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>1</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Provide your VRChat displayname</span>
+                <span>this may be different than your vrstop.health username</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>2</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Accept the website’s friend request</span>
+                <span>this is because VRChat only shows the last login date for friends</span>
+            </div>
+        </div>
+        <div class="vrh-landing-point">
+            <div class="vrh-landing-bullet">
+                <span>3</span>
+            </div>
+            <div class="vrh-title-and-subtitle">
+                <span>Put a short generated code in your VRChat bio</span>
+                <span>this is to make sure you really are linking your own account</span>
+            </div>
+        </div>
+    </div>
+</div>
