@@ -1,10 +1,11 @@
 using BenjaminAbt.HCaptcha.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using VrRetreat.Core;
+using VrRetreat.Core.Boundaries.Infrastructure;
+using VrRetreat.Infrastructure;
 using VrRetreat.Infrastructure.Entities;
-using VrRetreat.WebApp.Data;
+using VrRetreat.WebApp.Extensions;
 using VrRetreat.WebApp.Factory;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,13 @@ builder.Services.AddIdentity<VrRetreatUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<VrRetreatUser>, CustomClaimsFactory>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBioCodeGenerator, BioCodeGenerator>();
+builder.Services.AddSingleton<IVrChat, VrChat>();
+builder.Services.AddSingleton<Random>();
+builder.Services.AddSingleton<VrRetreat.Core.IConfiguration>(sp => JsonConfiguration.FromFile("VrChatConfig.json"));
+builder.Services.AddUseCases();
+builder.Services.AddPresenters();
 
 builder.Services.AddHCaptcha(builder.Configuration.GetSection("HCaptcha"));
 

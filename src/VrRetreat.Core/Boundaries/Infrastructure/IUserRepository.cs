@@ -6,4 +6,5 @@ public interface IUserRepository
 {
     Task<IVrRetreatUser> GetUserByUsernameAsync(string username);
     Task UpdateUserAsync (IVrRetreatUser user);
+    Task<bool> HasLinkedAccountByUsername(string username);
 }

@@ -1,0 +1,10 @@
+﻿@model VrChatFriendRequestModel
+
+<h2>We've sent you a friend request</h2>
+
+<form asp-action="VrChatFriendRequestValidation">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="submit" value="Verify" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
+    </div>
+</form>

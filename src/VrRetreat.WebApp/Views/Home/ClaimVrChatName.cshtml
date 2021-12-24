@@ -1,0 +1,15 @@
+﻿@model VrChatNameClaimModel
+
+<h2>Claim VRChat Name</h2>
+
+<form asp-action="ClaimVrChatName">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group vrh-form-group">
+        <label asp-for="VrChatName" class="control-label vrh-label"></label>
+        <input asp-for="VrChatName" class="form-control vrh-input" />
+        <span asp-validation-for="VrChatName" class="text-danger vrh-validation-error"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
+    </div>
+</form>

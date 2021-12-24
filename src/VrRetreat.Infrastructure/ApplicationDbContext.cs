@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VrRetreat.Infrastructure.Entities;
 
-namespace VrRetreat.WebApp.Data
+namespace VrRetreat.Infrastructure
 {
     public class ApplicationDbContext : IdentityDbContext<VrRetreatUser>
     {

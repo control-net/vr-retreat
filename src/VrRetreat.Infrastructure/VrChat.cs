@@ -12,6 +12,7 @@ public class VrChat : IVrChat
     private readonly UsersApi _users;
     private readonly FriendsApi _friends;
     private readonly NotificationsApi _notifications;
+    private bool _initialized;
 
     public VrChat(IConfiguration config)
     {
@@ -29,6 +30,10 @@ public class VrChat : IVrChat
 
     public async Task InitializeAsync()
     {
+        if (_initialized)
+            return;
+
+        _initialized = true;
         // NOTE(Peter): Getting the current user
         //              sets the required API Key.
         _ = await _auth.GetCurrentUserAsync();
@@ -36,12 +41,14 @@ public class VrChat : IVrChat
 
     public async Task<bool> GetPlayerExistsAsync(string username)
     {
+        await InitializeAsync();
         var result = await _auth.CheckUserExistsAsync(displayName: username);
         return result._UserExists;
     }
 
     public async Task<VrChatUser> GetPlayerByNameAsync(string username)
     {
+        await InitializeAsync();
         try
         {
             var result = await _users.GetUserByNameAsync(username);
@@ -73,6 +80,7 @@ public class VrChat : IVrChat
 
     public async Task SendFriendRequestByUserId(string userId)
     {
+        await InitializeAsync();
         var status = await _friends.GetFriendStatusAsync(userId);
 
         if (status.IsFriend)
@@ -94,6 +102,7 @@ public class VrChat : IVrChat
 
     public async Task<bool> IsFriendByUserId(string userId)
     {
+        await InitializeAsync();
         var status = await _friends.GetFriendStatusAsync(userId);
 
         return status.IsFriend;
@@ -101,6 +110,7 @@ public class VrChat : IVrChat
 
     public async Task<VrChatUser> GetPlayerByIdAsync(string userId)
     {
+        await InitializeAsync();
         var result = await _users.GetUserAsync(userId);
 
         return ToVrChatUser(result);

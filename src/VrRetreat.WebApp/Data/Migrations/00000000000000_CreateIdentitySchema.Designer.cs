@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
-using VrRetreat.WebApp.Data;
+using VrRetreat.Infrastructure;
 
 namespace VrRetreat.WebApp.Data.Migrations
 {

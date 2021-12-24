@@ -50,5 +50,6 @@ public class VrChatAccountClaimUseCase : IVrChatAccountClaimUseCase
 
         await _userRepository.UpdateUserAsync(user);
         await _vrChat.SendFriendRequestByUserId(user.VrChatId);
+        _outputPort.SuccessfulClaim();
     }
 }
