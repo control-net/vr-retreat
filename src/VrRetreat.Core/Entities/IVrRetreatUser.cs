@@ -8,4 +8,6 @@ public interface IVrRetreatUser
     bool HasUsernameCheckCooldown { get; }
     void UpdateLastUsernameCheck();
     void ClearVrChatLink();
+    bool HasFriendRequestCooldown { get; }
+    void UpdateLastFriendRequestCheck();
 }
