@@ -20,6 +20,8 @@ public class VrRetreatUser : IdentityUser, IVrRetreatUser
 
     public bool HasFriendRequestCooldown => LastFriendRequestSent is not null && (DateTime.Now - LastFriendRequestSent).Value.TotalSeconds < 60;
 
+    public bool HasBioRequestCooldown => LastBioCheck is not null && (DateTime.Now - LastBioCheck).Value.TotalSeconds < 60;
+
     public void ClearVrChatLink()
     {
         IsVrChatAccountLinked = false;
@@ -27,6 +29,8 @@ public class VrRetreatUser : IdentityUser, IVrRetreatUser
         VrChatId = string.Empty;
         VrChatLastLogin = null;
     }
+
+    public void UpdateLastBioRequestCheck() => LastBioCheck = DateTime.Now;
 
     public void UpdateLastFriendRequestCheck() => LastFriendRequestSent = DateTime.Now;
 

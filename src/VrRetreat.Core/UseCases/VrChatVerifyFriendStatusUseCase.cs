@@ -5,9 +5,9 @@ namespace VrRetreat.Core.UseCases;
 
 public class VrChatVerifyFriendStatusUseCase : IVrChatVerifyFriendStatusUseCase
 {
-    private IVrChatVerifyFriendStatusOutputPort _outputPort;
-    private IUserRepository _userRepository;
-    private IVrChat _vrChat;
+    private readonly IVrChatVerifyFriendStatusOutputPort _outputPort;
+    private readonly IUserRepository _userRepository;
+    private readonly IVrChat _vrChat;
 
     public VrChatVerifyFriendStatusUseCase(IVrChatVerifyFriendStatusOutputPort outputPort, IUserRepository userRepository, IVrChat vrChat)
     {
