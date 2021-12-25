@@ -112,9 +112,11 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Settings()
     {
-        if ((!_signInManager.IsSignedIn(User)))
+        if (!_signInManager.IsSignedIn(User))
+        {
             return RedirectToAction("Index", "Home");
-
+        }
+        
         return View();
     }
 
