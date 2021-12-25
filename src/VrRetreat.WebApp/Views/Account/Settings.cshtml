@@ -1,0 +1,62 @@
+﻿@using Microsoft.Extensions.Options
+@model UserSettingsModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="container mt-4">
+    <div class="profile">
+        <div class="info">
+        </div>
+        <img class="rounded-circle float-left d-inline p-2" style="width:110px" src="@(User.Claims.FirstOrDefault(c => c.Type == "avatarurl")?.Value ?? "/img/anon.webp")" />
+        <h2 class="d-inline p-2">@(User.Identity.Name ?? "username")</h2>
+        <input type="button" value="Fetch Avatar from VrChat" class="mt-3 py-2 btn btn-secondary vrh-btn-secondary vrh-btn-bulky border-0 d-block" />
+    </div>
+
+    <div class="following">
+        <h2 class="vrh-subtitle mb-4">Manage Following</h2>
+    </div>
+
+    <div class="security">
+        <h2 class="vrh-subtitle mb-4">Security</h2>
+
+        <form asp-action="ResetPassword" class="vhr-security">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group vrh-form-group">
+                <label asp-for="CurrentPassword" class="control-label vrh-label">Old Password</label>
+                <input asp-for="CurrentPassword" class="form-control vrh-input" />
+                <span asp-validation-for="CurrentPassword" class="text-danger vrh-validation-error"></span>
+            </div>
+            <div class="form-group vrh-form-group">
+                <label asp-for="Password" class="control-label vrh-label">Password</label>
+                <input asp-for="Password" class="form-control vrh-input" />
+                <span asp-validation-for="Password" class="text-danger vrh-validation-error"></span>
+            </div>
+            <div class="form-group vrh-form-group">
+                <label asp-for="ConfirmPassword" class="control-label vrh-label">New Password Again</label>
+                <input asp-for="ConfirmPassword" class="form-control vrh-input" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger vrh-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Change Password" class="py-2 btn btn-secondary vrh-btn-secondary vrh-btn-full-width vrh-btn-bulky border-0" />
+            </div>
+        </form>
+
+    </div>
+
+    <div class="manage">
+        <h2 class="vrh-subtitle mb-4">Manage Account</h2>
+        <div class="vhr-account-actions">
+            <a asp-action="RelinkAccount" class="btn btn-danger vrh-btn-warning-1 vrh-btn-full-width vrh-btn-bulky mb-4">Link a Different VRChat Account</a>
+            <a asp-action="DownloadAccount" class="btn btn-danger vrh-btn-warning-2 vrh-btn-full-width vrh-btn-bulky mb-4">Download a Copy of Your Data</a>
+            <a asp-action="UnlinkAccount" class="btn btn-danger vrh-btn-danger-1 vrh-btn-full-width vrh-btn-bulky mb-4">Unlink This VRChat Account</a>
+            <a asp-action="DeleteAccount" class="btn btn-danger vrh-btn-danger-2 vrh-btn-full-width vrh-btn-bulky mb-4">Delete My VRStop.health Account</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
