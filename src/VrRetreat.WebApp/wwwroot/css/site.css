@@ -21,6 +21,26 @@ body {
     margin-bottom: 60px;
 }
 
+main {
+    padding-bottom: 2rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    height: 60px;
+    background-color: #262626;
+    z-index: 99;
+}
+
+footer p {
+    margin: 0;
+    line-height: normal;
+    font-size: 0.8em;
+    align-self: center;
+}
+
 .vrh-navbar-bg {
     background-color: #353535;
 }
