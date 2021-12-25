@@ -21,10 +21,6 @@ body {
     margin-bottom: 60px;
 }
 
-main {
-    padding-bottom: 2rem;
-}
-
 footer {
     display: flex;
     justify-content: space-around;
@@ -130,6 +126,7 @@ footer p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 2rem;
 }
 
 .vrh-landing-footer > h3 {
@@ -142,11 +139,9 @@ footer p {
     background-image: url('../img/bg-2.webp');
     background-size: cover;
     background-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    padding: 2rem;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -157,11 +152,9 @@ footer p {
     background-image: url('../img/bg-1.webp');
     background-size: cover;
     background-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    padding: 2rem;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -170,10 +163,10 @@ footer p {
 
 .vrh-registration-card {
     background-color: #181818;
-    padding: 1em;
-    width: 50%;
-    min-width: 30em;
-    max-width: 40em;
+    padding: 3.2em;
+    width: 32%;
+    min-width: 25rem;
+    max-width: 31rem;
 }
 
 @media screen and (max-width: 500px) {
@@ -291,5 +284,5 @@ a {
 }
 
 .vrh-mt-xxl {
-    margin-top: 10em;
+    margin-top: 5em;
 }
