@@ -21,10 +21,6 @@ body {
     margin-bottom: 60px;
 }
 
-main {
-    padding-bottom: 2rem;
-}
-
 footer {
     display: flex;
     justify-content: space-around;
@@ -130,6 +126,7 @@ footer p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 1rem;
 }
 
 .vrh-landing-footer > h3 {
