@@ -149,7 +149,7 @@ public class AccountController : Controller
     [Authorize]
     public IActionResult RelinkAccount()
     {
-        return RedirectToAction(nameof(HomeController.ClaimVrChatName), "Home");
+        return RedirectToAction(nameof(AccountLinkController.ClaimVrChatName), "Home");
     }
 
     [Authorize]
