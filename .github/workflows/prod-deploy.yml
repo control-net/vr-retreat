@@ -35,6 +35,8 @@ jobs:
       run: |
         rm ./deploy/appsettings.json
         echo '${{ secrets.PROD_APPSETTINGS }}' > ./deploy/appsettings.json
+        rm ./deploy/VrChatConfig.json
+        echo '${{ secrets.VRCHAT_CONFIG }}' > ./deploy/VrChatConfig.json
         scp -o StrictHostKeyChecking=no -r ./deploy/* root@vrstop.health://var/www/vrstopstage
     - name: Copy and Apply Migrations
       run: |
