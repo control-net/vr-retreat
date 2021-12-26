@@ -7,11 +7,14 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
+            <a asp-controller="Account" asp-action="Settings" class="nav-link btn btn-link text-light">Settings</a>
+        </li>
+        <li class="nav-item d-flex align-items-center">
             <img class="vrh-navbar-img" src="@(User.Claims.FirstOrDefault(c => c.Type == "avatarurl")?.Value ?? "/img/anon.webp")" />
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-controller="Account" asp-action="Logout">
-                <button type="submit" class="nav-link btn btn-link text-info">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
             </form>
         </li>
     }
