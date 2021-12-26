@@ -45,13 +45,17 @@ dotnet build
 
 In order to run VRChat API tests or run the application against a real VRChat API you're going to need to create a configuration file with the appropriate credentials.
 
+> :warning: You shouldn't use your real VRChat account, instead, create a new one
+
+> :warning: This will not work if the account has 2FA enabled
+
 ### For Unit Tests
 
 - Create a file and name it `TestConfig.json` in the `/src/VrRetreat.Tests/` directory.
 
 ### For Application Use
 
-- _A configuration file isn't yet defined for the application itself._
+- Fill in your VRC credentials in `/src/VrRetreat.WebApp/VrChatConfig.json`
 
 ### Contents
 
@@ -64,6 +68,33 @@ The contents of your config file should be as follows:
 }
 ```
 
-> :warning: You shouldn't use your real VRChat account, instead, create a new one
+## Database & Migrations
 
-> :warning: This will not work if the account has 2FA enabled
+If you're the [Visual Studio IDE](https://visualstudio.microsoft.com/vs/) you already have a local SQL Server ready.
+
+On other platforms, you might need to install and configure an MSSQL server.
+
+### Applying Migrations
+
+Before you can start using the application, you should apply all migrations.
+
+First install the dotnet EF tools:
+
+```
+dotnet tool install --global dotnet-ef
+```
+
+> 💡 The `--global` flag installs the tool for your whole system
+
+Then change your directory into the WebApp and update the database:
+
+```
+cd src/VrRetreat.WebApp
+dotnet ef database update
+```
+
+## hCaptcha
+
+The registration view uses hCaptcha.
+
+You might want to register your own [hCaptcha](https://www.hcaptcha.com/) account and fill in the `src/VrRetreat.WebApp/appsettings.json` hCaptcha section.
