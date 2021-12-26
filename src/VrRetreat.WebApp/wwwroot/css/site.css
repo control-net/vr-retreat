@@ -6,6 +6,14 @@ html {
     html {
         font-size: 16px;
     }
+
+    .vhr-account-actions {
+        width: 40%;
+    }
+
+    .vhr-security {
+        width: 50%;
+    }
 }
 
 html {
@@ -65,10 +73,10 @@ footer p {
     border: none;
 }
 
-.vrh-btn-primary:hover {
-    background-color: #244023;
-    color: #eee;
-}
+    .vrh-btn-primary:hover {
+        background-color: #244023;
+        color: #eee;
+    }
 
 .vrh-btn-secondary {
     background-color: #373737;
@@ -77,6 +85,50 @@ footer p {
 
     .vrh-btn-secondary:hover {
         background-color: #252525;
+        color: #eee;
+    }
+
+.vrh-btn-warning-1 {
+    background-color: #6a8420;
+    color: white;
+    border: none;
+}
+
+    .vrh-btn-warning-1:hover {
+        background-color: #59701c;
+        color: #eee;
+    }
+
+.vrh-btn-warning-2 {
+    background-color: #846820;
+    color: white;
+    border: none;
+}
+
+    .vrh-btn-warning-2:hover {
+        background-color: #705719;
+        color: #eee;
+    }
+
+.vrh-btn-danger-1 {
+    background-color: #843820;
+    color: white;
+    border: none;
+}
+
+    .vrh-btn-danger-1:hover {
+        background-color: #77321d;
+        color: #eee;
+    }
+
+.vrh-btn-danger-2 {
+    background-color: #842020;
+    color: white;
+    border: none;
+}
+
+    .vrh-btn-danger-2:hover {
+        background-color: #681a1a;
         color: #eee;
     }
 
@@ -114,13 +166,13 @@ footer p {
     flex-direction: column;
 }
 
-.vrh-title-and-subtitle > span:first-child {
-    font-size: 20px;
-}
+    .vrh-title-and-subtitle > span:first-child {
+        font-size: 20px;
+    }
 
-.vrh-title-and-subtitle > span:nth-child(2) {
-    font-style: italic;
-}
+    .vrh-title-and-subtitle > span:nth-child(2) {
+        font-style: italic;
+    }
 
 .vrh-landing-footer {
     display: flex;
@@ -129,11 +181,11 @@ footer p {
     padding-bottom: 1rem;
 }
 
-.vrh-landing-footer > h3 {
-    font-weight: bold;
-    margin-bottom: 1em;
-    margin-top: 1.5em;
-}
+    .vrh-landing-footer > h3 {
+        font-weight: bold;
+        margin-bottom: 1em;
+        margin-top: 1.5em;
+    }
 
 .vrh-bg-registration {
     background-image: url('../img/bg-2.webp');
@@ -198,22 +250,21 @@ footer p {
     margin-bottom: 5px;
 }
 
-.vrh-input[aria-invalid="true"] {
-    border-bottom: 3px solid #dc3538;
-}
+    .vrh-input[aria-invalid="true"] {
+        border-bottom: 3px solid #dc3538;
+    }
 
-.vrh-input[aria-invalid="true"]:focus {
-    border-bottom: 3px solid #dc3538;
-}
+        .vrh-input[aria-invalid="true"]:focus {
+            border-bottom: 3px solid #dc3538;
+        }
 
-.vrh-input:focus {
-    background-color: #121212;
-    border-bottom: 3px solid #535252;
-    color: white;
-}
+    .vrh-input:focus {
+        background-color: #121212;
+        border-bottom: 3px solid #535252;
+        color: white;
+    }
 
 .vrh-label {
-
 }
 
 .vrh-form-group {
@@ -221,7 +272,6 @@ footer p {
 }
 
 .vrh-validation-error {
-
 }
 
 .vrh-btn-full-width {
@@ -249,31 +299,31 @@ a {
     cursor: help;
 }
 
-.vrh-ua .vrh-ua-content {
-    visibility: hidden;
-    width: 30em;
-    background-color: #2c2c2c;
-    color: #fff;
-    padding: 1em;
-    position: absolute;
-    z-index: 2;
-    top: -23em;
-}
+    .vrh-ua .vrh-ua-content {
+        visibility: hidden;
+        width: 30em;
+        background-color: #2c2c2c;
+        color: #fff;
+        padding: 1em;
+        position: absolute;
+        z-index: 2;
+        top: -23em;
+    }
 
-.vrh-ua .vrh-ua-content::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 10%;
-  margin-left: -5px;
-  border-width: 1em;
-  border-style: solid;
-  border-color: #2c2c2c transparent transparent transparent;
-}
+        .vrh-ua .vrh-ua-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 10%;
+            margin-left: -5px;
+            border-width: 1em;
+            border-style: solid;
+            border-color: #2c2c2c transparent transparent transparent;
+        }
 
-.vrh-ua:hover .vrh-ua-content {
-    visibility: visible;
-}
+    .vrh-ua:hover .vrh-ua-content {
+        visibility: visible;
+    }
 
 .vrh-ua-icon {
     width: 30px;
