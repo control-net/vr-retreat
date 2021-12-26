@@ -1,10 +1,59 @@
 ﻿@model VrChatFriendRequestModel
+@{
+    ViewData["Title"] = "VRC Account Linking";
+}
 
-<h2>We've sent you a friend request</h2>
-
-<form asp-action="VrChatFriendRequestValidation">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <input type="submit" value="Verify" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
+<div class="container align-items-center flex-column d-flex">
+    <div class="vrh-breadcrumbs mt-5 mb-4">
+        <div class="vrh-bc-primary"></div>
+        <div class="vrh-bc-light"></div>
+        <div class="vrh-bc-dark"></div>
     </div>
-</form>
+
+    <p class="vrh-lead mt-4 mb-2">We’ve sent you a friend request from ‘vrretreat’</p>
+    <p class="vrh-lead mb-4">Go ahead and accept it</p>
+
+    <div class="vrh-ua vrh-mt-xxl">
+        <div class="vrh-ua-icon">?</div><span class="vrh-footnote-text"> Why is this necessary?</span>
+        <div class="vrh-ua-content" style="top: -11em;">
+            <p>You can see last login date and time only for users who are in your friends list.</p>
+            <p>That means our server needs to friend you in order to keep track of your progress.</p>
+        </div>
+    </div>
+
+    <form asp-action="VrChatFriendRequestValidation" class="vrh-form-wide">
+        <div asp-validation-summary="All" class="text-danger mt-3"></div>
+        <p id="tip" style="visibility: hidden;">We’ve sent you another friend request</p>
+        <div class="form-group">
+            <input type="submit" value="Verify" id="submit-btn" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
+            <a asp-controller="AccountLink" asp-action="ClaimVrChatName" class="btn vrh-btn-primary vrh-btn-full-width p-3 vrh-btn-danger-1 btn-lg px-4 me-sm-3 mt-3">Cancel and Link a Different Account</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    @if(!Model?.IsValid ?? true)
+    {
+<script>
+setInterval(onSecondElapsed, 1000);
+let cooldownLeft = 60;
+let btn = document.getElementById('submit-btn');
+
+document.getElementById('tip').style.visibility = 'visible';
+btn.disabled = true;
+
+function onSecondElapsed() {
+    if(cooldownLeft <= 0)
+    {
+        btn.disabled = false;
+        btn.value = 'Verify';
+        return;
+    }
+
+    btn.value = 'Verify (' + cooldownLeft + ' seconds)';
+    cooldownLeft--;
+}
+</script>
+    }
+}

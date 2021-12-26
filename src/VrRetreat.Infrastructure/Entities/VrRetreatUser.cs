@@ -16,11 +16,11 @@ public class VrRetreatUser : IdentityUser, IVrRetreatUser
     public DateTime? LastBioCheck { get; set; }
     public DateTime? LastUsernameCheck { get; set; }
 
-    public bool HasUsernameCheckCooldown => LastUsernameCheck is not null && (DateTime.Now - LastUsernameCheck).Value.TotalSeconds < 20;
+    public bool HasUsernameCheckCooldown => LastUsernameCheck is not null && (DateTime.Now - LastUsernameCheck).Value.TotalSeconds < 19;
 
-    public bool HasFriendRequestCooldown => LastFriendRequestSent is not null && (DateTime.Now - LastFriendRequestSent).Value.TotalSeconds < 60;
+    public bool HasFriendRequestCooldown => LastFriendRequestSent is not null && (DateTime.Now - LastFriendRequestSent).Value.TotalSeconds < 59;
 
-    public bool HasBioRequestCooldown => LastBioCheck is not null && (DateTime.Now - LastBioCheck).Value.TotalSeconds < 60;
+    public bool HasBioRequestCooldown => LastBioCheck is not null && (DateTime.Now - LastBioCheck).Value.TotalSeconds < 59;
 
     public void ClearVrChatLink()
     {

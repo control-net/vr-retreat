@@ -2,5 +2,5 @@
 
 public class VrChatFriendRequestModel
 {
+    public bool IsValid { get; set; } = true;
 }
-

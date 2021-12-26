@@ -28,16 +28,8 @@ public class HomeController : Controller
         if (await _userRepository.HasLinkedAccountByUsername(User.Identity?.Name ?? string.Empty))
         {
             var user = await _userManager.GetUserAsync(User);
-            // NOTE(Peter): Once Dashboard is finished, we'll construct the model here.
-            return View("Dashboard", new DashboardViewModel
-            {
-                CurrentUser = new()
-                {
-                    AvatarUrl = user.VrChatAvatarUrl,
-                    Failed = user.FailedChallenge,
-                    Username = user.VrChatName
-                }
-            });
+            // NOTE(Peter): After Milestone 1.1 this should point to a real Dashboard instead
+            return View("StartChallenge");
         }
 
         return View("UnlinkedAccount");

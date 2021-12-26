@@ -1,15 +1,59 @@
 ﻿@model VrChatNameClaimModel
+@{
+    ViewData["Title"] = "VRC Account Linking";
+}
 
-<h2>Claim VRChat Name</h2>
+<div class="container align-items-center flex-column d-flex">
+    <div class="vrh-breadcrumbs mt-5 mb-4">
+        <div class="vrh-bc-light"></div>
+        <div class="vrh-bc-dark"></div>
+        <div class="vrh-bc-dark"></div>
+    </div>
 
-<form asp-action="ClaimVrChatName">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group vrh-form-group">
-        <label asp-for="VrChatName" class="control-label vrh-label"></label>
-        <input asp-for="VrChatName" class="form-control vrh-input" />
-        <span asp-validation-for="VrChatName" class="text-danger vrh-validation-error"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
-    </div>
-</form>
+    <p class="vrh-lead my-4">Type in your VRChat display name</p>
+
+    <form asp-action="ClaimVrChatName" class="vrh-form-wide">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group vrh-form-group">
+            <input asp-for="VrChatName" class="form-control vrh-input" placeholder="Display name" />
+            <span asp-validation-for="VrChatName" class="text-danger vrh-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" id="submit-btn" class="btn btn-primary vrh-btn-primary vrh-btn-full-width vrh-btn-bulky" />
+        </div>
+    </form>
+            <div class="vrh-ua vrh-mt-xxl" id="ua" style="visibility: hidden;">
+            <div class="vrh-ua-icon">?</div><span class="vrh-footnote-text"> Why is this necessary?</span>
+            <div class="vrh-ua-content" style="top: -7em;">
+                <p>Unfortunatelly, VRChat does not allow us to query their API more than once per minute.</p>
+            </div>
+        </div>
+</div>
+
+
+@section Scripts
+{
+    @if(!Model?.IsValid ?? true)
+    {
+<script>
+setInterval(onSecondElapsed, 1000);
+let cooldownLeft = 20;
+let btn = document.getElementById('submit-btn');
+
+document.getElementById('ua').style.visibility = 'visible';
+btn.disabled = true;
+
+function onSecondElapsed() {
+    if(cooldownLeft <= 0)
+    {
+        btn.disabled = false;
+        btn.value = 'Submit';
+        return;
+    }
+
+    btn.value = 'Submit (' + cooldownLeft + ' seconds)';
+    cooldownLeft--;
+}
+</script>
+    }
+}

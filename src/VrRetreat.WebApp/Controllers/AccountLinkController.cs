@@ -59,6 +59,7 @@ public class AccountLinkController : Controller
         if (_accountClaimPresenter.Success)
             return RedirectToAction(nameof(VrChatFriendRequestValidation));
 
+        model.IsValid = false;
         return View(model);
     }
 
@@ -77,6 +78,7 @@ public class AccountLinkController : Controller
         if (_friendStatusPresenter.Success)
             return RedirectToAction(nameof(VrChatBioCodeValidation));
 
+        model.IsValid = false;
         return View(model);
     }
 
@@ -107,6 +109,7 @@ public class AccountLinkController : Controller
         if (_bioVerificationPresenter.Success)
             return RedirectToAction("Index", "Home");
 
+        model.IsValid = false;
         return View(model);
     }
 }

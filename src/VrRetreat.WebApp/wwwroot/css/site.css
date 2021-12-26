@@ -264,6 +264,13 @@ footer p {
         color: white;
     }
 
+pre {
+    background-color: #121212;
+    padding: 1em;
+    color: white;
+    font-size: 20px;
+}
+
 .vrh-label {
 }
 
@@ -339,4 +346,31 @@ a {
 
 .vrh-mt-xxl {
     margin-top: 10em;
+}
+
+.vrh-breadcrumbs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.vrh-breadcrumbs > div {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #727272;
+    margin: 0 .5rem;
+}
+
+.vrh-bc-dark { background-color: #383737 !important; }
+.vrh-bc-primary { background-color: #417340 !important; }
+.vrh-bc-light { background-color: #727272 !important; }
+
+.vrh-form-wide {
+    width: 50%;
+    min-width: 30rem;
+}
+
+.vrh-btn-primary:disabled {
+    background: #343434;
+    color: #929292;
 }
