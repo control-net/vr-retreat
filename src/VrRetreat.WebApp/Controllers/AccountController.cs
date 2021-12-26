@@ -1,10 +1,12 @@
 ﻿using BenjaminAbt.HCaptcha;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
+using VrRetreat.Core.Boundaries.Infrastructure;
 using VrRetreat.Infrastructure.Entities;
 using VrRetreat.WebApp.Models;
 using VrRetreat.WebApp.Models.Response;
@@ -15,11 +17,13 @@ public class AccountController : Controller
 {
     private readonly UserManager<VrRetreatUser> _userManager;
     private readonly SignInManager<VrRetreatUser> _signInManager;
+    private readonly IUserRepository _userRepository;
 
-    public AccountController(UserManager<VrRetreatUser> userManager, SignInManager<VrRetreatUser> signInManager)
+    public AccountController(UserManager<VrRetreatUser> userManager, SignInManager<VrRetreatUser> signInManager, IUserRepository userRepository)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _userRepository = userRepository;
     }
 
     [HttpGet]
@@ -110,17 +114,14 @@ public class AccountController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Settings()
-    {
-        if (!_signInManager.IsSignedIn(User))
-        {
-            return RedirectToAction("Index", "Home");
-        }
-        
+    {        
         return View();
     }
 
     [HttpPost]
+    [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ResetPassword(UserSettingsModel settingsModel)
     {
@@ -145,11 +146,13 @@ public class AccountController : Controller
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 
+    [Authorize]
     public IActionResult RelinkAccount()
     {
         return RedirectToAction(nameof(HomeController.ClaimVrChatName), "Home");
     }
 
+    [Authorize]
     public async Task<IActionResult> DownloadAccount()
     {
         var currentUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -168,6 +171,7 @@ public class AccountController : Controller
         return File(Encoding.UTF8.GetBytes(jsonString), "application/json;charset=UTF-8");
     }
 
+    [Authorize]
     public async Task<IActionResult> UnlinkAccount()
     {
         if (!ModelState.IsValid)
@@ -177,10 +181,12 @@ public class AccountController : Controller
 
         var currentUser = await _userManager.GetUserAsync(HttpContext.User);
         currentUser.ClearVrChatLink();
+        await _userRepository.UpdateUserAsync(currentUser);
 
         return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 
+    [Authorize]
     public async Task<IActionResult> DeleteAccount()
     {
         if (!ModelState.IsValid)
