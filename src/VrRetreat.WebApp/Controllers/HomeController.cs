@@ -57,10 +57,14 @@ public class HomeController : Controller
         await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!));
 
         if (_startChallegePresenter.Result is not null)
+        {
             return _startChallegePresenter.Result;
+        }
 
-        if(_startChallegePresenter.Success)
+        if (_startChallegePresenter.Success)
+        {
             return RedirectToAction("Index", "Home");
+        }
 
         return RedirectToAction("Index", "Home");
     }
