@@ -28,18 +28,14 @@ public class StartChallengeUseCaseTests
 
     [Fact]
     public void NullUsername_ShouldThrow()
-    => Assert.Throws<ArgumentNullException>(() => new StartChallengeInput(null!, "vrchatusername"));
-
-    [Fact]
-    public void NullOrEmptyVrChatUsername_ShouldThrow()
-        => Assert.Throws<ArgumentNullException>(() => new StartChallengeInput("username", null!));
+    => Assert.Throws<ArgumentNullException>(() => new StartChallengeInput(null!));
 
     [Fact]
     public async Task InvalidLoggedInUser_ShouldOutputCorrectly()
     {
         ArrangeLoggedInUser(null!);
 
-        await _sut.ExecuteAsync(new("username", "unknown-vrchatusername"));
+        await _sut.ExecuteAsync(new("username"));
 
         _outputPortMock.Verify(p => p.LoggedInUserNotFound(), Times.Once);
         _outputPortMock.VerifyNoOtherCalls();
@@ -54,7 +50,7 @@ public class StartChallengeUseCaseTests
             VrChatName = string.Empty
         });
 
-        await _sut.ExecuteAsync(new("username", "unknown-vrchatusername"));
+        await _sut.ExecuteAsync(new("username"));
 
         _outputPortMock.Verify(p => p.NoClaimedVrChatAccount(), Times.Once);
         _outputPortMock.VerifyNoOtherCalls();
@@ -70,7 +66,7 @@ public class StartChallengeUseCaseTests
             FailedChallenge = true
         }); ;
 
-        await _sut.ExecuteAsync(new("username", "unknown-vrchatusername"));
+        await _sut.ExecuteAsync(new("username"));
 
         _outputPortMock.Verify(p => p.ChallengeFailed(), Times.Once);
         _outputPortMock.VerifyNoOtherCalls();

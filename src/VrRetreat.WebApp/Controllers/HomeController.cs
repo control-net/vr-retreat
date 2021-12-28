@@ -57,7 +57,7 @@ public class HomeController : Controller
         var currentUser = await _userManager.GetUserAsync(HttpContext.User);
         
 
-        await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!, currentUser.VrChatName));
+        await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!));
 
         if (_startChallegePresenter.Result is not null)
         {

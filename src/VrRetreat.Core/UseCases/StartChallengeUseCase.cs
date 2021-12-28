@@ -38,12 +38,12 @@ public class StartChallengeUseCase : IStartChallengeUseCase
             return;
         }
 
-        var vrcUser = await _vrChat.GetPlayerByNameAsync(input.VrChatUsername);
+        var vrcUser = await _vrChat.GetPlayerByNameAsync(user.VrChatName);
         user.UpdateLastUsernameCheck();
 
         if (vrcUser is null)
         {
-            _outputPort.UnknownVrChatUsername(input.VrChatUsername);
+            _outputPort.UnknownVrChatUsername(user.VrChatName);
             return;
         }
 
