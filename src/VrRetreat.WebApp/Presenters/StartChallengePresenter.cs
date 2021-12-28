@@ -26,12 +26,17 @@ public class StartChallengePresenter : IStartChallengeOutputPort
     }
     public void ChallengeFailed()
     {
-        ModelState.AddModelError("ChallengeFailed", "You little addicted shit already failed the challenge. *Nyah*");
+        ModelState.AddModelError("ChallengeFailed", "You have already failed the challenge. *Nyah*");
     }
 
     public void SuccessfulStart()
     {
         Success = true;
+    }
+
+    public void UnknownVrChatUsername(string username)
+    {
+        ModelState?.AddModelError("Username", "This VRChat display name doesn't exist.");
     }
 }
 

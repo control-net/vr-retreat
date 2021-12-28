@@ -7,11 +7,13 @@ public class StartChallengeUseCase : IStartChallengeUseCase
 {
     private readonly IStartChallengeOutputPort _outputPort;
     private readonly IUserRepository _userRepository;
+    private readonly IVrChat _vrChat;
 
-    public StartChallengeUseCase(IStartChallengeOutputPort outputPort, IUserRepository userRepository)
+    public StartChallengeUseCase(IStartChallengeOutputPort outputPort, IUserRepository userRepository, IVrChat vrChat)
     {
         _outputPort = outputPort;
         _userRepository = userRepository;
+        _vrChat = vrChat;
     }
 
     public async Task ExecuteAsync(StartChallengeInput input)
@@ -36,7 +38,16 @@ public class StartChallengeUseCase : IStartChallengeUseCase
             return;
         }
 
-        user.VrChatLastLogin = DateTime.Now;
+        var vrcUser = await _vrChat.GetPlayerByNameAsync(input.VrChatUsername);
+        user.UpdateLastUsernameCheck();
+
+        if (vrcUser is null)
+        {
+            _outputPort.UnknownVrChatUsername(input.VrChatUsername);
+            return;
+        }
+
+        user.VrChatLastLogin = vrcUser.LastLogin;
         user.IsParticipating = true;
 
         await _userRepository.UpdateUserAsync(user);

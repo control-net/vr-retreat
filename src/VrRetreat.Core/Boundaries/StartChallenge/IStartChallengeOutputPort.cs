@@ -7,6 +7,6 @@ public interface IStartChallengeOutputPort
     void RedirectToIndex();
     void ChallengeFailed();
     void SuccessfulStart();
-
+    void UnknownVrChatUsername(string username);
 }
 
