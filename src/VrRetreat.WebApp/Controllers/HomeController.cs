@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VrRetreat.Core.Boundaries.Infrastructure;
+using VrRetreat.Core.Boundaries.StartChallenge;
 using VrRetreat.Infrastructure.Entities;
 using VrRetreat.WebApp.Models;
+using VrRetreat.WebApp.Presenters;
 
 namespace VrRetreat.WebApp.Controllers;
 
@@ -13,11 +16,17 @@ public class HomeController : Controller
     private readonly UserManager<VrRetreatUser> _userManager;
     private readonly IUserRepository _userRepository;
 
-    public HomeController(SignInManager<VrRetreatUser> signInManager, UserManager<VrRetreatUser> userManager, IUserRepository userRepository)
+    private readonly IStartChallengeUseCase _startChallengeUseCase;
+    private readonly StartChallengePresenter _startChallegePresenter;
+
+    public HomeController(SignInManager<VrRetreatUser> signInManager, UserManager<VrRetreatUser> userManager, IUserRepository userRepository, IStartChallengeUseCase startChallengeUseCase, StartChallengePresenter startChallengePresenter)
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _userRepository = userRepository;
+
+        _startChallengeUseCase = startChallengeUseCase;
+        _startChallegePresenter = startChallengePresenter;
     }
 
     public async Task<IActionResult> Index()
@@ -33,6 +42,34 @@ public class HomeController : Controller
         }
 
         return View("UnlinkedAccount");
+    }
+
+    [Authorize]
+    public async Task<IActionResult> InitChallenge()
+    {
+        _startChallegePresenter.ModelState = ModelState;
+
+        if (!ModelState.IsValid)
+        {
+            return View(nameof(Index));
+        }
+
+        var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+        
+
+        await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!));
+
+        if (_startChallegePresenter.Result is not null)
+        {
+            return _startChallegePresenter.Result;
+        }
+
+        if (_startChallegePresenter.Success)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        return RedirectToAction("Index", "Home");
     }
 
     public IActionResult Dashboard()

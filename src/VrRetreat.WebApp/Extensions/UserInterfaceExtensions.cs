@@ -1,4 +1,5 @@
 ﻿using VrRetreat.Core.Boundaries.BioCodeVerification;
+using VrRetreat.Core.Boundaries.StartChallenge;
 using VrRetreat.Core.Boundaries.VrChatAccountClaim;
 using VrRetreat.Core.Boundaries.VrChatVerifyFriendStatus;
 using VrRetreat.WebApp.Presenters;
@@ -17,6 +18,9 @@ namespace VrRetreat.WebApp.Extensions
 
             services.AddScoped<BioCodeVerificationPresenter>();
             services.AddScoped<IBioCodeVerificationOutputPort, BioCodeVerificationPresenter>(x => x.GetRequiredService<BioCodeVerificationPresenter>());
+
+            services.AddScoped<StartChallengePresenter>();
+            services.AddScoped<IStartChallengeOutputPort, StartChallengePresenter>(x => x.GetRequiredService<StartChallengePresenter>());
 
             return services;
         }
