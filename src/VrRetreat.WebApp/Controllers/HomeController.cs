@@ -44,11 +44,6 @@ public class HomeController : Controller
         return View("UnlinkedAccount");
     }
 
-    public IActionResult StartChallenge()
-    {
-        return View();
-    }
-
     [Authorize]
     public async Task<IActionResult> InitChallenge()
     {
