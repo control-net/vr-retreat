@@ -1,4 +1,5 @@
 ﻿using VrRetreat.Core.Boundaries.BioCodeVerification;
+using VrRetreat.Core.Boundaries.StartChallenge;
 using VrRetreat.Core.Boundaries.VrChatAccountClaim;
 using VrRetreat.Core.Boundaries.VrChatVerifyFriendStatus;
 using VrRetreat.Core.UseCases;
@@ -12,6 +13,7 @@ namespace VrRetreat.WebApp.Extensions
             services.AddScoped<IVrChatAccountClaimUseCase, VrChatAccountClaimUseCase>();
             services.AddScoped<IVrChatVerifyFriendStatusUseCase, VrChatVerifyFriendStatusUseCase>();
             services.AddScoped<IBioCodeVerificationUseCase, BioCodeVerificationUseCase>();
+            services.AddScoped<IStartChallengeUseCase, StartChallengeUseCase>();
 
             return services;
         }

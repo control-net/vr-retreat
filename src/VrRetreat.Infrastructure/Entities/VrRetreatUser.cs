@@ -15,6 +15,7 @@ public class VrRetreatUser : IdentityUser, IVrRetreatUser
     public DateTime? LastFriendRequestSent { get; set; }
     public DateTime? LastBioCheck { get; set; }
     public DateTime? LastUsernameCheck { get; set; }
+    public bool IsParticipating { get; set; }
 
     public bool HasUsernameCheckCooldown => LastUsernameCheck is not null && (DateTime.Now - LastUsernameCheck).Value.TotalSeconds < 19;
 
@@ -28,6 +29,7 @@ public class VrRetreatUser : IdentityUser, IVrRetreatUser
         VrChatAvatarUrl = string.Empty;
         VrChatId = string.Empty;
         VrChatLastLogin = null;
+        IsParticipating = false; 
     }
 
     public void UpdateLastBioRequestCheck() => LastBioCheck = DateTime.Now;

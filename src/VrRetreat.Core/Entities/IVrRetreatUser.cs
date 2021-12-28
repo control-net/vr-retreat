@@ -16,4 +16,5 @@ public interface IVrRetreatUser
     void UpdateLastFriendRequestCheck();
     bool HasBioRequestCooldown { get; }
     void UpdateLastBioRequestCheck();
+    bool IsParticipating { get; set; }
 }
