@@ -1,5 +1,7 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -14,11 +16,6 @@ html {
     .vhr-security {
         width: 50%;
     }
-}
-
-html {
-    position: relative;
-    min-height: 100%;
 }
 
 .navbar {
@@ -258,7 +255,6 @@ footer {
         width: 100%;
     }
 }
-
 
 .vrh-lead {
     text-align: center;
