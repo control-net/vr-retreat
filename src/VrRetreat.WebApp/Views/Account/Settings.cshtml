@@ -71,10 +71,18 @@
                              confirm-button-text="Unlink">
             </vc:popup-button>
 
+            <vc:popup-button popup-id="delete"
+                             popup-button-text="Delete My VRStop.health Account"
+                             popup-button-class="btn btn-danger vrh-btn-danger-2 vrh-btn-full-width vrh-btn-bulky mb-4"
+                             modal-title="Do you want to delete your VRStop.health Account?"
+                             modal-description="This cannot be undone!"
+                             confirm-button-action="DeleteAccount"
+                             confirm-button-class="btn btn-danger"
+                             confirm-button-text="Delete">
+            </vc:popup-button>
+
             <!--
-            @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="You will loose your progress", popupButtonText="Link a Different VRChat Account", popupButtonClass="btn btn-danger vrh-btn-warning-1 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="RelinkAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Relink"})
-            <a asp-action="DownloadAccount" class="btn btn-danger vrh-btn-warning-2 vrh-btn-full-width vrh-btn-bulky mb-4">Download a Copy of Your Data</a>
-            @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="You will loose your progress", popupButtonText="Unlink This VRChat Account", popupButtonClass="btn btn-danger vrh-btn-danger-1 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="UnlinkAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Unlink"})
+
             @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="Deleting your account cannot be undone.", popupButtonText="Delete My VRStop.health Account", popupButtonClass="btn btn-danger vrh-btn-danger-2 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="DeleteAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Delete"})
             -->
         </div>
