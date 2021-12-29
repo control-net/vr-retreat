@@ -139,6 +139,32 @@ footer p {
     padding-bottom: 5px;
 }
 
+.vrh-text-bolder {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.vrh-text-success {
+    color: #039e00;
+    font-weight: bold;
+}
+
+.vrh-text-danger {
+    color: #c30000;
+    font-weight: bold;
+}
+
+.vrh-text-larger {
+    font-size: 1.5rem;
+}
+
+.vrh-text-larger-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #a8a8a8;
+    text-align: center;
+}
+
 .vrh-screenshot {
     width: 50%;
     box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.4);
@@ -373,4 +399,16 @@ a {
 .vrh-btn-primary:disabled {
     background: #343434;
     color: #929292;
+}
+
+.vrh-avatar-large {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+}
+
+.vrh-avatar-medium {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
 }
