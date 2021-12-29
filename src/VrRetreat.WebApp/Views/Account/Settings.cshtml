@@ -49,10 +49,34 @@
     <div class="manage">
         <h2 class="vrh-subtitle mb-4">Manage Account</h2>
         <div class="vhr-account-actions">
-            <a asp-action="RelinkAccount" class="btn btn-danger vrh-btn-warning-1 vrh-btn-full-width vrh-btn-bulky mb-4">Link a Different VRChat Account</a>
+            <vc:popup-button popup-id="relink"
+                             popup-button-text="Link a Different VRChat Account"
+                             popup-button-class="btn btn-danger vrh-btn-warning-1 vrh-btn-full-width vrh-btn-bulky mb-4"
+                             modal-title="Do you want to link a different VRChat Account?"
+                             modal-description="Your current progess will be lost!"
+                             confirm-button-action="RelinkAccount"
+                             confirm-button-class="btn btn-danger"
+                             confirm-button-text="Relink">
+            </vc:popup-button>
+
             <a asp-action="DownloadAccount" class="btn btn-danger vrh-btn-warning-2 vrh-btn-full-width vrh-btn-bulky mb-4">Download a Copy of Your Data</a>
-            <a asp-action="UnlinkAccount" class="btn btn-danger vrh-btn-danger-1 vrh-btn-full-width vrh-btn-bulky mb-4">Unlink This VRChat Account</a>
-            <a asp-action="DeleteAccount" class="btn btn-danger vrh-btn-danger-2 vrh-btn-full-width vrh-btn-bulky mb-4">Delete My VRStop.health Account</a>
+
+            <vc:popup-button popup-id="unlink"
+                             popup-button-text="Unlink This VRChat Account"
+                             popup-button-class="btn btn-danger vrh-btn-danger-1 vrh-btn-full-width vrh-btn-bulky mb-4"
+                             modal-title="Do you want to unlink your VRChat Account?"
+                             modal-description="Your current progess will be lost!"
+                             confirm-button-action="UnlinkAccount"
+                             confirm-button-class="btn btn-danger"
+                             confirm-button-text="Unlink">
+            </vc:popup-button>
+
+            <!--
+            @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="You will loose your progress", popupButtonText="Link a Different VRChat Account", popupButtonClass="btn btn-danger vrh-btn-warning-1 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="RelinkAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Relink"})
+            <a asp-action="DownloadAccount" class="btn btn-danger vrh-btn-warning-2 vrh-btn-full-width vrh-btn-bulky mb-4">Download a Copy of Your Data</a>
+            @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="You will loose your progress", popupButtonText="Unlink This VRChat Account", popupButtonClass="btn btn-danger vrh-btn-danger-1 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="UnlinkAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Unlink"})
+            @await Component.InvokeAsync("PopupButton", new { modalTitle="Are you sure?", modalDescription="Deleting your account cannot be undone.", popupButtonText="Delete My VRStop.health Account", popupButtonClass="btn btn-danger vrh-btn-danger-2 vrh-btn-full-width vrh-btn-bulky mb-4", confirmButtonAction="DeleteAccount", confirmButtonClass="btn btn-danger", confirmButtonText="Delete"})
+            -->
         </div>
     </div>
 </div>
