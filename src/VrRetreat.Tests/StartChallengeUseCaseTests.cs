@@ -64,7 +64,7 @@ public class StartChallengeUseCaseTests
             VrChatId = string.Empty,
             VrChatName = string.Empty,
             FailedChallenge = true
-        }); ;
+        });
 
         await _sut.ExecuteAsync(new("username"));
 
@@ -72,11 +72,6 @@ public class StartChallengeUseCaseTests
         _outputPortMock.VerifyNoOtherCalls();
     }
 
-    private void ArrangeVrChatUser(VrChatUser user)
-    => _vrChatMock.Setup(vrc => vrc.GetPlayerByNameAsync(It.IsAny<string>())).ReturnsAsync(user);
-
     private void ArrangeLoggedInUser(VrRetreatUser user)
        => _userRepositoryMock.Setup(r => r.GetUserByUsernameAsync(It.IsAny<string>())).ReturnsAsync(user);
-
 }
-

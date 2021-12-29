@@ -81,8 +81,6 @@ public class HomeController : Controller
             return View(nameof(Index));
         }
 
-        var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-
         await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!));
 
         if (_startChallegePresenter.Result is not null)

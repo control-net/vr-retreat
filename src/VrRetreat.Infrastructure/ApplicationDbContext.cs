@@ -6,7 +6,7 @@ namespace VrRetreat.Infrastructure
 {
     public class ApplicationDbContext : IdentityDbContext<VrRetreatUser>
     {
-        private string _connStringFile = string.Empty;
+        private readonly string _connStringFile = string.Empty;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

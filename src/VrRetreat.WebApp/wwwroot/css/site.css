@@ -38,12 +38,12 @@ footer {
     z-index: 99;
 }
 
-footer p {
-    margin: 0;
-    line-height: normal;
-    font-size: 0.8em;
-    align-self: center;
-}
+    footer p {
+        margin: 0;
+        line-height: normal;
+        font-size: 0.8em;
+        align-self: center;
+    }
 
 .vrh-navbar-bg {
     background-color: #353535;
@@ -297,14 +297,8 @@ pre {
     font-size: 20px;
 }
 
-.vrh-label {
-}
-
 .vrh-form-group {
     margin-bottom: 1.2em;
-}
-
-.vrh-validation-error {
 }
 
 .vrh-btn-full-width {
@@ -379,17 +373,25 @@ a {
     justify-content: space-evenly;
 }
 
-.vrh-breadcrumbs > div {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background-color: #727272;
-    margin: 0 .5rem;
+    .vrh-breadcrumbs > div {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: #727272;
+        margin: 0 .5rem;
+    }
+
+.vrh-bc-dark {
+    background-color: #383737 !important;
 }
 
-.vrh-bc-dark { background-color: #383737 !important; }
-.vrh-bc-primary { background-color: #417340 !important; }
-.vrh-bc-light { background-color: #727272 !important; }
+.vrh-bc-primary {
+    background-color: #417340 !important;
+}
+
+.vrh-bc-light {
+    background-color: #727272 !important;
+}
 
 .vrh-form-wide {
     width: 50%;

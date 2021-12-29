@@ -154,10 +154,8 @@ public class VrChatAccountClaimUseCaseTests
         VerifyUpdatedUser(u => u.LastUsernameCheck is not null, "Did not set the LastUsernameCheck properly.");
     }
 
-    private IReturnsResult<IBioCodeGenerator> ArrangeBioCode(string bioCode)
-    {
-        return _bioCodeGeneratorMock.Setup(g => g.GenerateNewCode()).Returns(bioCode);
-    }
+    private void ArrangeBioCode(string bioCode)
+        => _bioCodeGeneratorMock.Setup(g => g.GenerateNewCode()).Returns(bioCode);
 
     [Fact]
     public async Task ValidInput_ShouldSendFriendRequest()
