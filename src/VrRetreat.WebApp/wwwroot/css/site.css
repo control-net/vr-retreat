@@ -412,3 +412,7 @@ a {
     height: 4rem;
     border-radius: 50%;
 }
+
+.vrh-modal {
+    background-color: #181818;
+}
