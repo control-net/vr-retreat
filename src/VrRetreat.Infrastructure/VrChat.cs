@@ -39,6 +39,11 @@ public class VrChat : IVrChat
         _ = await _auth.GetCurrentUserAsync();
     }
 
+    public async Task LogoutAsync()
+    {
+        await _auth.LogoutAsync();
+    }
+
     public async Task<bool> GetPlayerExistsAsync(string username)
     {
         await InitializeAsync();
