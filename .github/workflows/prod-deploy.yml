@@ -18,6 +18,8 @@ jobs:
       run: dotnet tool install --global dotnet-ef
     - name: Publish
       run: dotnet publish -c Release -r linux-x64 --self-contained false -o deploy src/VrRetreat.WebApp/VrRetreat.WebApp.csproj
+    - name: Publish bgw
+      run: dotnet publish -c Release -r linux-x64 --self-contained false -o deploy-bgw src/VrRetreat.BackgroundWorker/VrRetreat.BackgroundWorker.csproj
     - name: Generate Migrations
       run: |
         cd src/VrRetreat.WebApp
@@ -38,6 +40,11 @@ jobs:
         rm ./deploy/VrChatConfig.json
         echo '${{ secrets.VRCHAT_CONFIG }}' > ./deploy/VrChatConfig.json
         scp -o StrictHostKeyChecking=no -r ./deploy/* root@vrstop.health://var/www/vrstopstage
+    - name: Deploy Bgw
+      run: |
+        rm ./deploy-bgw/connString.txt
+        echo '${{ secrets.CONN_STRING }}' > ./deploy-bgw/connString.txt
+        scp -o StrictHostKeyChecking=no -r ./deploy-bgw/* root@vrstop.health://var/www/vrstopstage
     - name: Copy and Apply Migrations
       run: |
         scp -o StrictHostKeyChecking=no ./src/VrRetreat.WebApp/efbundle root@vrstop.health://var/www/vrstopstage
