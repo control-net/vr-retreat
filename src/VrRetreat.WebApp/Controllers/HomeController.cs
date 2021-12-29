@@ -37,11 +37,38 @@ public class HomeController : Controller
         if (await _userRepository.HasLinkedAccountByUsername(User.Identity?.Name ?? string.Empty))
         {
             var user = await _userManager.GetUserAsync(User);
-            // NOTE(Peter): After Milestone 1.1 this should point to a real Dashboard instead
-            return View("StartChallenge");
+
+            if(!user.IsParticipating)
+                return View("StartChallenge");
+
+            return View("Dashboard", GetDashboardModelFor(user));
         }
 
         return View("UnlinkedAccount");
+    }
+
+    private DashboardViewModel GetDashboardModelFor(VrRetreatUser user)
+    {
+        var participants = _userManager.Users.Where(u => u.IsParticipating && u.Id != user.Id && u.VrChatLastLogin != null).ToList();
+
+        return new()
+        {
+            CalendarWeeks = GetCalendarFor(user),
+            CurrentUser = UserToDashboardModel(user),
+            FollowedPeople = participants.Select(UserToDashboardModel),
+            RemainingChallengeTime = (DateTime.Now - new DateTime(2022, 2, 1)).Duration()
+        };
+    }
+
+    private UserDashboardModel UserToDashboardModel(VrRetreatUser user)
+    {
+        return new()
+        {
+            AvatarUrl = user.VrChatAvatarUrl,
+            LastVrChatLogin = user.VrChatLastLogin ?? DateTime.MinValue,
+            Username = user.VrChatName,
+            Failed = user.FailedChallenge
+        };
     }
 
     [Authorize]
@@ -55,7 +82,6 @@ public class HomeController : Controller
         }
 
         var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-        
 
         await _startChallengeUseCase.ExecuteAsync(new(User.Identity?.Name!));
 
@@ -76,6 +102,7 @@ public class HomeController : Controller
     {
         var model = new DashboardViewModel
         {
+            CalendarWeeks = GetCalendarFor(new VrRetreatUser() { VrChatLastLogin = new DateTime(2022, 1, 12, 14, 23, 59), FailedChallenge = true }),
             CurrentUser = new()
             {
                 Username = "voxie",
@@ -110,6 +137,59 @@ public class HomeController : Controller
         };
 
         return View("Dashboard", model);
+    }
+
+    private DateTime Now => DateTime.UtcNow;
+
+    private IEnumerable<CalendarWeek> GetCalendarFor(VrRetreatUser user)
+    {
+        const int DaysInChallengeCalendar = 42;
+        var calendarStartDate = new DateTime(2021, 12, 26);
+        var challengeStartDate = new DateTime(2022, 1, 1);
+        var challengeEndDate = new DateTime(2022, 1, 31, 23, 59, 59);
+
+        var result = new List<CalendarWeek>();
+        var activeWeek = new List<CalendarDayType>();
+        for (var dayMod = 0; dayMod < DaysInChallengeCalendar; dayMod++)
+        {
+            var currentDay = calendarStartDate.AddDays(dayMod);
+
+            if (currentDay < challengeStartDate || currentDay > challengeEndDate)
+            {
+                activeWeek.Add(CalendarDayType.OutsideOfBounds);
+            }
+            else
+            {
+                activeWeek.Add(GetCalendarDayTypeFor(user, currentDay));
+            }
+
+            if (currentDay.DayOfWeek == DayOfWeek.Saturday)
+            {
+                result.Add(new CalendarWeek { Days = activeWeek.ToArray() });
+                activeWeek.Clear();
+            }
+        }
+
+        return result;
+    }
+
+    private CalendarDayType GetCalendarDayTypeFor(VrRetreatUser user, DateTime currentDay)
+    {
+        if (user.VrChatLastLogin is null)
+            return CalendarDayType.TBD;
+        
+        if (DateOnly.FromDateTime(currentDay) == DateOnly.FromDateTime(Now))
+        {
+            return user.FailedChallenge ? CalendarDayType.Failure : CalendarDayType.TBD;
+        }
+
+        if (DateOnly.FromDateTime(currentDay) > DateOnly.FromDateTime(Now))
+            return CalendarDayType.TBD;
+
+        if (DateOnly.FromDateTime(currentDay) < DateOnly.FromDateTime(user.VrChatLastLogin.Value))
+            return CalendarDayType.TBD;
+
+        return user.FailedChallenge ? CalendarDayType.Failure : CalendarDayType.Success;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

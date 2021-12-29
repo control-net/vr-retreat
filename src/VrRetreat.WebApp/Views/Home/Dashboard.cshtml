@@ -1,16 +1,125 @@
-﻿@model DashboardViewModel
-
-<h1>Welcome to the dashboard!</h1>
-
-<p>Name: @Model.CurrentUser.Username</p>
-
-<img src="@Model.CurrentUser.AvatarUrl" width=60 height=60 />
-
-<hr /><hr />
-
-@foreach(var user in Model.FollowedPeople)
-{
-    <p>Name: @user.Username</p>
-    <img src="@user.AvatarUrl" width=60 height=60 />
-    <hr />
+﻿@using Humanizer
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <img src="@Model.CurrentUser.AvatarUrl" class="vrh-avatar-large" />
+                <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
+                    <span class="vrh-text-bolder">@Model.CurrentUser.Username</span>
+                    @if (Model.CurrentUser.Failed)
+                    {
+                        <span><span class="vrh-text-danger">FAILED</span> after @Model.CurrentUser.OfflineDuration.Humanize()</span>
+                    }
+                    else
+                    {
+                        <span>Offline for <span class="vrh-text-success ">@Model.CurrentUser.OfflineDuration.Humanize()</span></span>
+                    }
+                </div>
+            </div>
+            @if (!Model.CurrentUser.Failed)
+            {
+                <div class="d-flex flex-column justify-content-center align-items-end">
+                    <span class="vrh-text-larger">You haven't been on VRC for</span>
+                    <span class="vrh-text-bolder">@Model.CurrentUser.OfflineDuration.Humanize()</span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <div class="d-flex flex-column">
+                <span class="vrh-text-larger-title mb-3">Other participants</span>
+
+                @foreach (var user in Model.FollowedPeople)
+                {
+                    <div class="d-flex justify-content-center mt-3">
+                        <img src="@user.AvatarUrl" class="vrh-avatar-medium" />
+                        <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
+                            <span class="vrh-text-bolder">@user.Username</span>
+                            @if (user.Failed)
+                            {
+                                <span><span class="vrh-text-danger">FAILED</span> after @user.OfflineDuration.Humanize()</span>
+                            }
+                            else
+                            {
+                                <span>Offline for <span class="vrh-text-success ">@user.OfflineDuration.Humanize()</span></span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="d-flex flex-column">
+                <span class="vrh-text-larger-title mb-3">@Model.RemainingChallengeTime.Humanize() left in the challenge</span>
+            </div>
+            <div class="month">
+                @foreach (var week in Model.CalendarWeeks)
+                {
+                    <div class="week">
+                        @foreach (var dayType in week.Days)
+                        {
+                            if (dayType == CalendarDayType.Success)
+                            {
+                                <div class="day day-success"></div>
+                            }
+                            else if (dayType == CalendarDayType.Failure)
+                            {
+                                <div class="day day-failed"></div>
+                            }
+                            else if (dayType == CalendarDayType.TBD)
+                            {
+                                <div class="day day-tbd"></div>
+                            }
+                            else
+                            {
+                                <div class="day"></div>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .month {
+        max-width: 400px;
+        margin: 20px auto;
+    }
+
+    .week {
+        display: -webkit-box;
+        display: flex;
+        height: 57px;
+    }
+
+    .day {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0;
+        padding: 5px;
+        background-color: #2c2c2c;
+        border-radius: 15px;
+        margin: 2px;
+    }
+
+    .day-tbd {
+        background-color: #202020;
+    }
+
+    .day-success {
+        background-color: #417340;
+    }
+
+    .day-failed {
+        background-color: #661717;
+    }
+</style>
