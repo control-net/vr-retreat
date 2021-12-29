@@ -44,9 +44,3 @@ jobs:
         ssh root@vrstop.health "cd /var/www/vrstopstage && chmod +x ./efbundle && ./efbundle --connection '${{ secrets.MIGRATIONS_CONN_STRING }}'"
     - name: Restart Production App
       run: ssh root@vrstop.health "systemctl restart vrstop"
-    - name: Publish And Deploy Background Worker
-      run: |
-        dotnet publish -c Release -r linux-x64 --self-contained false -o deploy-bgw src/VrRetreat.BackgroundWorker/VrRetreat.BackgroundWorker.csproj
-        rm ./deploy-bgw/connString.txt
-        echo '${{ secrets.CONN_STRING }}' > ./deploy-bgw/connString.txt
-        scp -o StrictHostKeyChecking=no -r ./deploy-bgw/* root@vrstop.health://var/www/vrstopstage
