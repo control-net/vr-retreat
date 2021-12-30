@@ -37,7 +37,16 @@ foreach (var user in usersToCheck)
 
     if (user.VrChatLastLogin is null)
     {
-        Log("The user doesn't have an last known login time. Skipping...");
+        Log("The user doesn't have a last known login time.");
+
+        if (vrcUser.LastLogin is null)
+        {
+            Log("VRChat was unable to provide a last login time. Forced to skip...");
+            continue;
+        }
+
+        Log("Updating last login time...");
+        user.VrChatLastLogin = vrcUser.LastLogin;
         continue;
     }
 
