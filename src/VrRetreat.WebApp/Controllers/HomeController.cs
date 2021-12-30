@@ -65,7 +65,7 @@ public class HomeController : Controller
         return new()
         {
             AvatarUrl = user.VrChatAvatarUrl,
-            LastVrChatLogin = user.VrChatLastLogin ?? DateTime.MinValue,
+            LastVrChatLogin = user.VrChatLastLogin ?? DateTime.UtcNow,
             Username = user.VrChatName,
             Failed = user.FailedChallenge
         };
