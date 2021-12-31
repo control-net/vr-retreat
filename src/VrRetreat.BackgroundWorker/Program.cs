@@ -4,7 +4,11 @@ using VrRetreat.Infrastructure;
 using VrRetreat.Infrastructure.Entities;
 
 var logBuilder = new StringBuilder();
-void Log(string message) => logBuilder.AppendLine($"{DateTime.Now:G} - {message}");
+void Log(string message)
+{
+    logBuilder.AppendLine($"{DateTime.Now:G} - {message}");
+    Console.WriteLine($"{DateTime.Now:G} - {message}");
+};
 
 DbContextOptions<ApplicationDbContext> options = new();
 
@@ -84,7 +88,7 @@ foreach (var user in usersToCheck)
 
 await context.SaveChangesAsync();
 
-if(logoutRequired)
+if (logoutRequired)
     await vrc.LogoutAsync();
 
 await context.DisposeAsync();
