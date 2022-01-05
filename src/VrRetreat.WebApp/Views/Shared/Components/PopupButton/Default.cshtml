@@ -1,21 +1,24 @@
 ﻿@model PopupButtonViewModel;
 
-<a class="@Model.PopupButtonClass" data-bs-toggle="modal" data-bs-target="#@Model.PopupId">@Model.PopupButtonText</a>
+@if (Model is not null)
+{
+    <a class="@Model.PopupButtonClass" data-bs-toggle="modal" data-bs-target="#@Model.PopupId">@Model.PopupButtonText</a>
 
-<div class="modal fade" id="@Model.PopupId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content vrh-modal">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">@Model.Title</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        @Model.Description
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a asp-action="@Model.ConfirmButtonAction" class="@Model.ConfirmButtonClass">@Model.ConfirmButtonText</a>
-      </div>
+    <div class="modal fade" id="@Model.PopupId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content vrh-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@Model.Title</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @Model.Description
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a asp-action="@Model.ConfirmButtonAction" class="@Model.ConfirmButtonClass">@Model.ConfirmButtonText</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+}

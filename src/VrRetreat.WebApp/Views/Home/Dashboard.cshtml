@@ -5,87 +5,94 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex">
-                <img src="@Model.CurrentUser.AvatarUrl" class="vrh-avatar-large" />
-                <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
-                    <span class="vrh-text-bolder">@Model.CurrentUser.Username</span>
-                    @if (Model.CurrentUser.Failed)
+@if (Model is not null)
+{
+    <div class="container mt-5">
+        <div class="row">
+            <div class="d-flex justify-content-between">
+                @if (Model.CurrentUser is not null)
+                {
+                    <div class="d-flex">
+
+                        <img src="@Model.CurrentUser.AvatarUrl" class="vrh-avatar-large" />
+                        <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
+                            <span class="vrh-text-bolder">@Model.CurrentUser.Username</span>
+                            @if (Model.CurrentUser.Failed)
+                            {
+                                <span><span class="vrh-text-danger">FAILED</span> (last login @Model.CurrentUser.OfflineDuration.Humanize() ago)</span>
+                            }
+                            else
+                            {
+                                <span>Offline for <span class="vrh-text-success ">@Model.CurrentUser.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
+                            }
+                        </div>
+                    </div>
+                    @if (!Model.CurrentUser.Failed)
                     {
-                        <span><span class="vrh-text-danger">FAILED</span> (last login @Model.CurrentUser.OfflineDuration.Humanize() ago)</span>
+                        <div class="d-flex flex-column justify-content-center align-items-end">
+                            <span class="vrh-text-larger">You haven't been on VRC for</span>
+                            <span class="vrh-text-bolder">@Model.CurrentUser.OfflineDuration.Humanize()</span>
+                        </div>
                     }
-                    else
-                    {
-                        <span>Offline for <span class="vrh-text-success ">@Model.CurrentUser.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
-                    }
+                }
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-6">
+                <div class="d-flex flex-column align-items-center mb-5">
+                    <span class="vrh-text-larger-title mb-3">Other participants</span>
+                    <div>
+                        @foreach (var user in Model.FollowedPeople)
+                        {
+                            <div class="d-flex mt-3">
+                                <img src="@user.AvatarUrl" class="vrh-avatar-medium" />
+                                <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
+                                    <span class="vrh-text-bolder">@user.Username</span>
+                                    @if (user.Failed)
+                                    {
+                                        <span class="vrh-text-danger">FAILED</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Offline for <span class="vrh-text-success ">@user.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
-            @if (!Model.CurrentUser.Failed)
-            {
-                <div class="d-flex flex-column justify-content-center align-items-end">
-                    <span class="vrh-text-larger">You haven't been on VRC for</span>
-                    <span class="vrh-text-bolder">@Model.CurrentUser.OfflineDuration.Humanize()</span>
+            <div class="col-sm-6">
+                <div class="d-flex flex-column">
+                    <span class="vrh-text-larger-title mb-3">@Model.RemainingChallengeTime.Humanize(maxUnit: TimeUnit.Day) left in the challenge</span>
                 </div>
-            }
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-sm-6">
-            <div class="d-flex flex-column align-items-center mb-5">
-                <span class="vrh-text-larger-title mb-3">Other participants</span>
-                <div>
-                    @foreach (var user in Model.FollowedPeople)
+                <div class="month">
+                    @foreach (var week in Model.CalendarWeeks)
                     {
-                        <div class="d-flex mt-3">
-                            <img src="@user.AvatarUrl" class="vrh-avatar-medium" />
-                            <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
-                                <span class="vrh-text-bolder">@user.Username</span>
-                                @if (user.Failed)
+                        <div class="week">
+                            @foreach (var dayType in week.Days)
+                            {
+                                if (dayType == CalendarDayType.Success)
                                 {
-                                    <span class="vrh-text-danger">FAILED</span>
+                                    <div class="day day-success"></div>
+                                }
+                                else if (dayType == CalendarDayType.Failure)
+                                {
+                                    <div class="day day-failed"></div>
+                                }
+                                else if (dayType == CalendarDayType.TBD)
+                                {
+                                    <div class="day day-tbd"></div>
                                 }
                                 else
                                 {
-                                    <span>Offline for <span class="vrh-text-success ">@user.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
+                                    <div class="day"></div>
                                 }
-                            </div>
+                            }
                         </div>
                     }
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="d-flex flex-column">
-                <span class="vrh-text-larger-title mb-3">@Model.RemainingChallengeTime.Humanize(maxUnit: TimeUnit.Day) left in the challenge</span>
-            </div>
-            <div class="month">
-                @foreach (var week in Model.CalendarWeeks)
-                {
-                    <div class="week">
-                        @foreach (var dayType in week.Days)
-                        {
-                            if (dayType == CalendarDayType.Success)
-                            {
-                                <div class="day day-success"></div>
-                            }
-                            else if (dayType == CalendarDayType.Failure)
-                            {
-                                <div class="day day-failed"></div>
-                            }
-                            else if (dayType == CalendarDayType.TBD)
-                            {
-                                <div class="day day-tbd"></div>
-                            }
-                            else
-                            {
-                                <div class="day"></div>
-                            }
-                        }
-                    </div>
-                }
-            </div>
-        </div>
     </div>
-</div>
+}

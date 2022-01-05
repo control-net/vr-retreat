@@ -5,7 +5,7 @@ namespace VrRetreat.WebApp.Components;
 
 public class PopupButtonViewComponent : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync(
+    public Task<IViewComponentResult> InvokeAsync(
         string modalTitle,
         string modalDescription,
         string popupButtonText,
@@ -28,9 +28,7 @@ public class PopupButtonViewComponent : ViewComponent
             ConfirmButtonClass = confirmButtonClass,
             ConfirmButtonText = confirmButtonText
         };
-        return View(viewModel);
+
+        return Task.FromResult<IViewComponentResult>(View(viewModel));
     }
-
-
 }
-

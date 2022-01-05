@@ -9,7 +9,7 @@
         <div class="info">
         </div>
         <img class="rounded-circle float-left d-inline p-2" style="width:110px; height:110px;" src="@(User.Claims.FirstOrDefault(c => c.Type == "avatarurl")?.Value ?? "/img/anon.webp")" />
-        <h2 class="d-inline p-2">@(User.Identity.Name ?? "username")</h2>
+        <h2 class="d-inline p-2">@(User?.Identity?.Name ?? "username")</h2>
     </div>
 
     <div class="security">
