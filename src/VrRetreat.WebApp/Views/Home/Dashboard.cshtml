@@ -1,4 +1,5 @@
 ﻿@using Humanizer
+@using Humanizer.Localisation
 @model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
@@ -13,11 +14,11 @@
                     <span class="vrh-text-bolder">@Model.CurrentUser.Username</span>
                     @if (Model.CurrentUser.Failed)
                     {
-                        <span><span class="vrh-text-danger">FAILED</span> after @Model.CurrentUser.OfflineDuration.Humanize()</span>
+                        <span><span class="vrh-text-danger">FAILED</span> (last login @Model.CurrentUser.OfflineDuration.Humanize() ago)</span>
                     }
                     else
                     {
-                        <span>Offline for <span class="vrh-text-success ">@Model.CurrentUser.OfflineDuration.Humanize()</span></span>
+                        <span>Offline for <span class="vrh-text-success ">@Model.CurrentUser.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
                     }
                 </div>
             </div>
@@ -32,31 +33,32 @@
     </div>
     <div class="row mt-5">
         <div class="col-sm-6">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column align-items-center mb-5">
                 <span class="vrh-text-larger-title mb-3">Other participants</span>
-
-                @foreach (var user in Model.FollowedPeople)
-                {
-                    <div class="d-flex justify-content-center mt-3">
-                        <img src="@user.AvatarUrl" class="vrh-avatar-medium" />
-                        <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
-                            <span class="vrh-text-bolder">@user.Username</span>
-                            @if (user.Failed)
-                            {
-                                <span><span class="vrh-text-danger">FAILED</span> after @user.OfflineDuration.Humanize()</span>
-                            }
-                            else
-                            {
-                                <span>Offline for <span class="vrh-text-success ">@user.OfflineDuration.Humanize()</span></span>
-                            }
+                <div>
+                    @foreach (var user in Model.FollowedPeople)
+                    {
+                        <div class="d-flex mt-3">
+                            <img src="@user.AvatarUrl" class="vrh-avatar-medium" />
+                            <div class="d-flex flex-column justify-content-center" style="margin-left: 1em;">
+                                <span class="vrh-text-bolder">@user.Username</span>
+                                @if (user.Failed)
+                                {
+                                    <span class="vrh-text-danger">FAILED</span>
+                                }
+                                else
+                                {
+                                    <span>Offline for <span class="vrh-text-success ">@user.OfflineDuration.Humanize(maxUnit: TimeUnit.Day)</span></span>
+                                }
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="d-flex flex-column">
-                <span class="vrh-text-larger-title mb-3">@Model.RemainingChallengeTime.Humanize() left in the challenge</span>
+                <span class="vrh-text-larger-title mb-3">@Model.RemainingChallengeTime.Humanize(maxUnit: TimeUnit.Day) left in the challenge</span>
             </div>
             <div class="month">
                 @foreach (var week in Model.CalendarWeeks)

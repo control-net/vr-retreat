@@ -55,7 +55,7 @@ public class HomeController : Controller
         {
             CalendarWeeks = GetCalendarFor(user),
             CurrentUser = UserToDashboardModel(user),
-            FollowedPeople = participants.Select(UserToDashboardModel),
+            FollowedPeople = participants.Select(UserToDashboardModel).OrderBy(u => u.Failed).ThenByDescending(u => u.OfflineDuration),
             RemainingChallengeTime = (DateTime.Now - new DateTime(2022, 2, 1)).Duration()
         };
     }
