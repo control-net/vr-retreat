@@ -12,9 +12,14 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<IVrRetreatUser> GetUserByUsernameAsync(string username)
+    public Task<IVrRetreatUser?> GetUserByUsernameAsync(string username)
     {
-        return _context.Users.FirstOrDefault(u => u.UserName == username);
+        if (!_context.Users.Any(u => u.UserName == username))
+            return Task.FromResult<IVrRetreatUser?>(null);
+
+        var user = _context.Users.First(u => u.UserName == username);
+        
+        return Task.FromResult((IVrRetreatUser?)user);
     }
 
     public Task<bool> HasLinkedAccountByUsername(string username)
