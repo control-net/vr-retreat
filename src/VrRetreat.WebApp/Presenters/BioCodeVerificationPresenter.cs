@@ -13,7 +13,7 @@ namespace VrRetreat.WebApp.Presenters
 
         public void BioCodeNotFound()
         {
-            ModelState.AddModelError("BioCode", "We couldn't find the code in your bio");
+            ModelState?.AddModelError("BioCode", "We couldn't find the code in your bio");
         }
 
         public void BioCodeVerified()

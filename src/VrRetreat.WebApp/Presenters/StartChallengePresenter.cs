@@ -26,7 +26,7 @@ public class StartChallengePresenter : IStartChallengeOutputPort
     }
     public void ChallengeFailed()
     {
-        ModelState.AddModelError("ChallengeFailed", "You have already failed the challenge. *Nyah*");
+        ModelState?.AddModelError("ChallengeFailed", "You have already failed the challenge. *Nyah*");
     }
 
     public void SuccessfulStart()
