@@ -39,6 +39,9 @@ foreach (var user in usersToCheck)
         continue;
     }
 
+    if (user.VrChatAvatarUrl != vrcUser.AvatarUrl)
+        user.VrChatAvatarUrl = vrcUser.AvatarUrl;
+
     if (user.VrChatLastLogin is null)
     {
         Log("The user doesn't have a last known login time.");
@@ -79,6 +82,7 @@ foreach (var user in usersToCheck)
     {
         Log($"The user failed the challenge because {vrcLastLogin}(as a day) > {knownLastLogin}(as a day)");
         user.FailedChallenge = true;
+        user.VrChatLastLogin = vrcLastLogin;
     }
     else
     {
